@@ -5,7 +5,7 @@
 baseUrl = "http://sgdp.vercel.app"
 
 [_.globalMeta]
-title = "pupperemeritus"
+title = "Sri Guru Datta Pisupati"
 description = "All about me in a single website."
 longDescription = "Everything about me (like 10%) in a single website."
 cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
@@ -38,9 +38,9 @@ keywords = [
 ]
 
 [_.blogMeta]
-title = "pupperemeritus's Blog"
-description = "Practical wisdom, unfiltered thoughts, and hot takes."
-longDescription = ""
+title = "Sri Guru Datta's Blog"
+description = "My endless rambling"
+longDescription = "I will ramble on about tech, science, music and anything that catches my attention"
 keywords = [
   "scientific compute",
   "linux",
@@ -69,9 +69,9 @@ keywords = [
   "music",
 ]
 [_.projectMeta]
-title = "pupperemeritus's Projects"
-description = "A list of my web development projects and developer tools."
-longDescription = "All of my projects, including both frontend and full-stack applications."
+title = "Sri Guru Datta Pisupati's Projects"
+description = "A list of my software, machine learning, scientific computing, music and miscellaneous projects"
+longDescription = "A list of my software, machine learning, scientific computing, music and miscellaneous projects"
 cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
 keywords = [
   "scientific compute",
@@ -107,14 +107,14 @@ longDescription = "Oi, you're barkin' up the wrong tree. The page you are lookin
 cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
 
 [_.hero]
-title = "pupperemeritus"
+title = "Sri Guru Datta Pisupati"
 subtitle = "Just one more <br/> who’s searching for <br/>The world that ought to be"
 image = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
 ctaText = "View Projects"
 ctaUrl = "/projects"
 
 [_.personal]
-name = "pupperemeritus"
+name = "Sri Guru Datta Pisupati"
 githubProfile = "https://github.com/pupperemeritus"
 twitterProfile = "https://twitter.com/pupperemeritus9"
 linkedinProfile = "https://linkedin.com/in/sri-guru-datta-p"
