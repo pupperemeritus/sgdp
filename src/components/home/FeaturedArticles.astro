@@ -13,6 +13,7 @@ const { featuredArticles } = Astro.props;
 const { data: config } = await getConfigurationCollection();
 ---
 
+<div class="zag-border-b"></div>
 <div class="flex justify-between items-center w-full">
   <h3 class="font-display text-lg sm:text-xl leading-loose">{config.texts.articlesName}</h3>
   <Anchor url="/blog" class="text-base">{config.texts.viewAll}</Anchor>

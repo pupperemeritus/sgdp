@@ -57,7 +57,7 @@ const { data: config } = await getConfigurationCollection();
       href={`${config.site.baseUrl}/blog/${frontmatter.slug}`}
     />
   </Fragment>
-  <Section class="pt-8 zag-responsive-text max-w-none">
+  <Section class="pt-8 zag-responsive-text font-serif max-w-none">
     <div class="blog-content">
     <div class="flex flex-col gap-4 mt-8 mb-16">
       <h1
@@ -70,7 +70,7 @@ const { data: config } = await getConfigurationCollection();
         <span>{frontmatter.readTime} min</span>
       </div>
     </div>
-    <Prose>
+    <Prose class="font-serif">
       <slot />
     </Prose>
     <p class="pt-8 placeholder-zag-dark-opaque">~{config.personal.name}</p>

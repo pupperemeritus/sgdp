@@ -58,17 +58,25 @@ const { data: config } = await getConfigurationCollection();
   </nav>
 </header>
 
+
 <script>
-  const button = document.getElementById("mobileNavBtn");
-  const nav = document.getElementById("siteNav");
+  let button, nav;
   let isOpen = false;
+
+  function initNavToggle() {
+    button = document.getElementById("mobileNavBtn");
+    nav    = document.getElementById("siteNav");
+    // Remove any old listener, then bind afresh
+    button.removeEventListener("click", toggleNav);
+    button.addEventListener("click", toggleNav);
+  }
 
   function updateNavState() {
     const isMobile = window.matchMedia("(max-width: 640px)").matches;
     if (isMobile) {
-      nav!.style.transform = isOpen ? "translateY(0)" : "translateY(-100%)";
+      nav.style.transform = isOpen ? "translateY(0)" : "translateY(-100%)";
     } else {
-      nav!.style.transform = "translateY(0)";
+      nav.style.transform = "translateY(0)";
       isOpen = false;
     }
   }
@@ -78,8 +86,23 @@ const { data: config } = await getConfigurationCollection();
     updateNavState();
   }
 
-  button?.addEventListener("click", toggleNav);
-  window.addEventListener("resize", updateNavState);
-
+  // Bind on first load
+  initNavToggle();
   updateNavState();
+
+  // Re‑init (and close) on every Astro navigation
+  document.addEventListener("astro:page-load", () => {
+    isOpen = false;
+    initNavToggle();
+    updateNavState();
+  });
+  document.addEventListener("astro:after-swap", () => {
+    isOpen = false;
+    initNavToggle();
+    updateNavState();
+  });
+
+  // Keep nav state correct on viewport resize
+  window.addEventListener("resize", updateNavState);
 </script>
+

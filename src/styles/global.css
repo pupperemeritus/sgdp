@@ -395,36 +395,65 @@ article img {
   ) !important;
 }
 
-/* ==== MOBILE (≤640px): Final font‑size & padding refinements ==== */
-@media (max-width: 720px) {
-  /* 1. Shrink the project title */
-  .project-content h1 {
-    font-size: 1.5rem !important;
-    line-height: 1.3 !important;
-  }
-
-  /* 2. Tighter gutters around the tag row so it never overflows */
-  .project-content .flex.text-sm {
-    gap: 0.125rem !important;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-    overflow-x: auto; /* keep scrolling behavior */
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* 3. Smaller tag pills with reduced padding & font */
-  .project-content .flex.text-sm span {
-    flex: 0 0 auto;
-    display: inline-block;
-    padding: 0.125rem 0.25rem !important;
-    font-size: 0.475rem !important;
-  }
-
-  /* 4. Tighter overall page padding */
+/* ==== GLOBAL MOBILE LAYOUT (≤640px) ==== */
+@media (max-width: 640px) {
+  /* 1. Narrow out the content gutters */
   .zag-responsive-container,
   .full-width,
   .zag-responsive-container.w-full-vw {
-    padding-left: 0.075rem !important;
-    padding-right: 0.075rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
   }
+
+  /* 2. Tighter spacing in main sections */
+  main {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  /* 3. Stack any two‑column layouts vertically */
+  .flex.flex-row.sm\\:flex-row {
+    flex-direction: column !important;
+  }
+
+  /* 4. Ensure your section headings don’t overflow: */
+  h1,
+  h2,
+  h3 {
+    word-break: break-word;
+    font-size: clamp(1rem, 5vw, 1.75rem) !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* ==== MOBILE‑ONLY VERTICAL GUTTERS ==== */
+@media (max-width: 640px) {
+  /* tune these to your taste */
+  :root {
+    --v-gap-min: 0.75rem;
+    --v-gap-max: 1.5rem;
+  }
+
+  /* every sibling in main/section/blog/project stacks with a clamp() gap */
+  main > * + *,
+  section > * + *,
+  .blog-content > * + *,
+  .project-content > * + * {
+    margin-top: clamp(var(--v-gap-min), 4vw, var(--v-gap-max));
+  }
+}
+
+body {
+  font-family: var(--font-serif);
+}
+
+h1 {
+  font-family: var(--font-display);
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: var(--font-mono);
 }
