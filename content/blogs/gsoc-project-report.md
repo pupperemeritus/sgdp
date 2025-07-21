@@ -10,7 +10,9 @@ featured: True
 timestamp: 2025-07-21T02:39:03+05:30
 ---
 
-# Astronomy Using Unevenly Sampled Data
+# Astronomy Using Unevenly Sampled Data @ StingraySoftware
+
+---
 
 # About the Organization
 
