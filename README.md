@@ -1,4 +1,12 @@
-![Zaggonaut, a retro-inspired theme for Astro.](./images/README.png)
+# My portfolio website based on Zaggonaut Astro theme
+
+big thanks to RATIU5 for providing this awesome template for free
+
+check the collapsible section below if you want to use the same template
+
+<details>
+  <summary>Original Readme written by RATIU5</summary>
+  ![Zaggonaut, a retro-inspired theme for Astro.](./images/README.png)
 
 Zaggonaut is a retro-inspired theme for Astro, built using TypeScript, TailwindCSS, and of course, Astro.
 
@@ -65,3 +73,6 @@ Zaggonaut uses the following CSS variables:
 ## Ready To Try?
 
 Check out [the theme website](https://zaggonaut.dev) to give it a spin!
+
+</details>
+

@@ -2,12 +2,12 @@
 # we need to prefix all configuration keys with an underscore.
 
 [_.site]
-baseUrl = "http://localhost:4321"
+baseUrl = "http://sgdp.vercel.app"
 
 [_.globalMeta]
 title = "pupperemeritus"
-description = "Retro-Inspired Theme & Built for Astro"
-longDescription = "Zaggonaut is a retro-inspired theme for Astro, built using TypeScript, TailwindCSS, and Astro."
+description = "All about me in a single website."
+longDescription = "Everything about me (like 10%) in a single website."
 cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
 keywords = [
   "scientific compute",
@@ -38,7 +38,7 @@ keywords = [
 ]
 
 [_.blogMeta]
-title = "Zaggonaut Blog"
+title = "pupperemeritus's Blog"
 description = "Practical wisdom, unfiltered thoughts, and hot takes."
 longDescription = ""
 keywords = [
@@ -69,7 +69,7 @@ keywords = [
   "music",
 ]
 [_.projectMeta]
-title = "Zaggonaut Projects"
+title = "pupperemeritus's Projects"
 description = "A list of my web development projects and developer tools."
 longDescription = "All of my projects, including both frontend and full-stack applications."
 cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
@@ -101,9 +101,9 @@ keywords = [
   "music",
 ]
 [_.notFoundMeta]
-title = "Zaggonaut 404"
-description = "The page you are looking for does not exist."
-longDescription = "The page you are looking for does not exist. Maybe it never existed. Spooky."
+title = "Error 404"
+description = "The page you are looking for does not exist. "
+longDescription = "Oi, you're barkin' up the wrong tree. The page you are looking for does not exist. Maybe it never existed. Spooky."
 cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
 
 [_.hero]
