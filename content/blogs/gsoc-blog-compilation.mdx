@@ -229,14 +229,14 @@ The wrapper class is trivial, they only wrap the fast and slow lomb scargle four
 
 ```python
 rand = np.random.default_rng(42)
-    n = 100
-    t = np.sort(rand.random(n)) * n
-    y = np.cos(2 * np.pi * 5 * t) + 0.01 * rand.standard_normal(n)
-    y -= np.min(y)
-    lc1 = Lightcurve(t, y, err_dist="poisson")
-    y2 = np.cos(2 * np.pi * 5.0 * (t)) + 0.01 * rand.standard_normal(n)
-    y2 -= np.min(y2)
-    lc2 = Lightcurve(t, y2, err_dist="poisson")
+n = 100
+t = np.sort(rand.random(n)) * n
+y = np.cos(2 * np.pi * 5 * t) + 0.01 * rand.standard_normal(n)
+y -= np.min(y)
+lc1 = Lightcurve(t, y, err_dist="poisson")
+y2 = np.cos(2 * np.pi * 5.0 * (t)) + 0.01 * rand.standard_normal(n)
+y2 -= np.min(y2)
+lc2 = Lightcurve(t, y2, err_dist="poisson")
 ```
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xgf4z7yaxi81aoxj9dkx.png)
@@ -263,7 +263,7 @@ This week I successfully finished implementing the fast algorithm. Now my `LombS
 
 Testing on the following synthetic data has been conducted to compare the outputs with the existing cross spectrum and power spectrum for evenly spaced data first then checking the outputs of the lomb scargle variants on unevenly sampled data
 
-```
+```python
 rand = np.random.default_rng(42)
 n = 1000
 t = np.linspace(0, 10, n)
