@@ -2,47 +2,122 @@
 # we need to prefix all configuration keys with an underscore.
 
 [_.site]
-baseUrl = "http://zaggonaut.dev"
+baseUrl = "http://localhost:4321"
 
 [_.globalMeta]
-title = "Zaggonaut"
+title = "pupperemeritus"
 description = "Retro-Inspired Theme & Built for Astro"
 longDescription = "Zaggonaut is a retro-inspired theme for Astro, built using TypeScript, TailwindCSS, and Astro."
-cardImage = "https://zaggonaut.dev/michael-dam-unsplash.webp"
-keywords = ["web development", "design", "technology"]
+cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+keywords = [
+  "scientific compute",
+  "linux",
+  "astrophysics",
+  "astrophotography",
+  "guitar",
+  "prog rock",
+  "technology",
+  "geospatial",
+  "artificial intelligence",
+  "machine learning",
+  "progressive rock",
+  "progressive metal",
+  "astronomy",
+  "time series",
+  "performance",
+  "vector databases",
+  "data science",
+  "git",
+  "docker",
+  "kubernetes",
+  "shell",
+  "motorcycle",
+  "f1",
+  "adventure",
+  "music",
+]
 
 [_.blogMeta]
 title = "Zaggonaut Blog"
 description = "Practical wisdom, unfiltered thoughts, and hot takes."
-longDescription = "Web development, tech trends, and the occasional programming mishap."
-cardImage = "https://zaggonaut.dev/michael-dam-unsplash.webp"
-keywords = ["web development", "design", "technology"]
-
+longDescription = ""
+keywords = [
+  "scientific compute",
+  "linux",
+  "astrophysics",
+  "astrophotography",
+  "guitar",
+  "prog rock",
+  "technology",
+  "geospatial",
+  "artificial intelligence",
+  "machine learning",
+  "progressive rock",
+  "progressive metal",
+  "astronomy",
+  "time series",
+  "performance",
+  "vector databases",
+  "data science",
+  "git",
+  "docker",
+  "kubernetes",
+  "shell",
+  "motorcycle",
+  "f1",
+  "adventure",
+  "music",
+]
 [_.projectMeta]
 title = "Zaggonaut Projects"
 description = "A list of my web development projects and developer tools."
 longDescription = "All of my projects, including both frontend and full-stack applications."
-cardImage = "https://zaggonaut.dev/michael-dam-unsplash.webp"
-keywords = ["web development", "design", "technology"]
-
+cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+keywords = [
+  "scientific compute",
+  "linux",
+  "astrophysics",
+  "astrophotography",
+  "guitar",
+  "prog rock",
+  "technology",
+  "geospatial",
+  "artificial intelligence",
+  "machine learning",
+  "progressive rock",
+  "progressive metal",
+  "astronomy",
+  "time series",
+  "performance",
+  "vector databases",
+  "data science",
+  "git",
+  "docker",
+  "kubernetes",
+  "shell",
+  "motorcycle",
+  "f1",
+  "adventure",
+  "music",
+]
 [_.notFoundMeta]
 title = "Zaggonaut 404"
 description = "The page you are looking for does not exist."
 longDescription = "The page you are looking for does not exist. Maybe it never existed. Spooky."
-cardImage = "https://zaggonaut.dev/michael-dam-unsplash.webp"
+cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
 
 [_.hero]
-title = "Zaggonaut"
-subtitle = "Retro-Inspired Theme &<br />Built for Astro"
-image = "https://zaggonaut.dev/michael-dam-unsplash.webp"
+title = "pupperemeritus"
+subtitle = "Just one more <br/> who’s searching for <br/>The world that ought to be"
+image = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
 ctaText = "View Projects"
 ctaUrl = "/projects"
 
 [_.personal]
-name = "Zaggonaut"
-githubProfile = "https://github.com/RATIU5/zaggonaut"
-twitterProfile = "https://twitter.com"
-linkedinProfile = "https://linkedin.com/"
+name = "pupperemeritus"
+githubProfile = "https://github.com/pupperemeritus"
+twitterProfile = "https://twitter.com/pupperemeritus9"
+linkedinProfile = "https://linkedin.com/sri-guru-datta-p"
 
 [_.texts]
 articlesName = "Articles"

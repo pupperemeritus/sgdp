@@ -1,0 +1,49 @@
+---
+title: Lexical Fuzzy Semantic Search (EE-ONE-D)
+slug: lfss
+description: A text search tool for semantic search
+longDescription: EE-ONE-D is a sophisticated text analysis and search system designed to enable comprehensive entity-oriented natural language exploration.
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["text search", "semantic search", "open-source", "vector database"]
+githubUrl: https://github.com/cogatimus/EE-ONE-D
+timestamp: 2025-07-20T17:30:00+05:30
+featured: true
+---
+
+EE-ONE-D is a sophisticated text analysis and search system designed to enable comprehensive entity-oriented natural language exploration. It is named after the gadget used by the attacking operator Lion in Rainbow Six Siege, chosen for its ability to find enemy operators in motion. By integrating multiple complementary search approaches - typographical similarity, semantic meaning, and fuzzy matching - the system delivers robust search capabilities that extend beyond traditional keyword matching.
+
+## Technical Implementation
+
+The project consists of four primary interconnected modules:
+
+### 1. Typographical Module
+
+- Implements edit distance algorithms and language model-based encoding to identify words with similar spelling patterns
+- It compares with the NLTK words corpus and finds the typographical neighbors.
+- Utilizes BERT tokenization and embedding techniques to calculate similarity metrics between the query and potential matches
+- Works using the edit distance, basic neighbouring words are found which are then sorted by semantic similarity by comparing the cosine similarity between the embeddings of all found words
+
+### 2. Semantic Module
+
+- Leverages transformer-based language models to understand semantic relationships between words and phrases
+- Integrates with a Milvus vector database for efficient similarity search across large text corpora
+- Encodes text using the sentence-transformers framework to generate meaningful vector representations
+
+### 3. Fuzzy Search Module
+
+- Implements the Levenshtein distance algorithm to find approximate string matches,
+- The key difference between the typographical module and fuzzy search module is that the fuzzy search module is the final step
+- Includes configurable distance thresholds and contextual result presentation
+- Optimized for performance with early filtering based on string length properties
+
+### 4. Attention Module
+
+- Analyzes the relative importance of words within the query
+- It returns top n important tokens in the query
+- This is an additional module that isn’t part of the basic lexical fuzzy semantic search pipeline, we made it in order to perform a weighted search for input text with multiple words
+
+The architecture emphasizes modularity with a pipeline-based design pattern that allows components to be used independently or chained together for more powerful search capabilities. We used Milvus for vector storage and retrieval, with custom embedding functions to translate natural language into high-dimensional vector spaces.
+
+All modules implement a common SearchClass interface, enabling seamless integration through the custom SearchPipeline orchestrator. The project includes comprehensive logging, detailed documentation, and example implementations to facilitate usage and extension.
+
+The Pipeline is highly customizable with ability to pass configurations for each of the modules.

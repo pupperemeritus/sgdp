@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import Gist from "@kotosha/astro-gist"
 import ProjectLayout from "../../layouts/ProjectLayout.astro";
 
 export async function getStaticPaths() {
@@ -23,5 +24,5 @@ const { Content } = await render(project);
 ---
 
 <ProjectLayout frontmatter={project.data}>
-  <Content />
+  <Content components={{Gist}}/>
 </ProjectLayout>

@@ -2,14 +2,14 @@
 import { getConfigurationCollection } from "../lib/utils";
 import Anchor from "./common/Anchor.astro";
 import Section from "./common/Section.astro";
-
+import '../styles/global.css'
 const { data: config } = await getConfigurationCollection();
 
 const date = new Date();
 const year = date.getFullYear();
 ---
 
-<footer class="mt-16 mb-8">
+<footer class="zag-footer mt-16 mb-8">
   <Section class="mb-4">
     <div
       class="zag-border-b zag-transition pb-4 flex flex-col sm:flex-row sm:flex-nowrap gap-8 sm:items-center"
@@ -24,19 +24,19 @@ const year = date.getFullYear();
         }
       </ul>
       <div class="flex flex-start items-start gap-4 w-full">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-          class="zag-fill zag-transition w-8 h-8 min-h-8 min-w-8 max-h-8 max-w-8 -translate-y-2"
-        >
-          <path
-            fill="currentColor"
-            d="m10 7l-2 4h3v6H5v-6l2-4zm8 0l-2 4h3v6h-6v-6l2-4z"></path>
-        </svg>
+      <!--   <svg -->
+      <!--     xmlns="http://www.w3.org/2000/svg" -->
+      <!--     width="32" -->
+      <!--     height="32" -->
+      <!--     viewBox="0 0 24 24" -->
+      <!--     class="zag-fill zag-transition w-8 h-8 min-h-8 min-w-8 max-h-8 max-w-8 -translate-y-2" -->
+      <!--   > -->
+      <!--     <path -->
+      <!--       fill="currentColor" -->
+      <!--       d="m10 7l-2 4h3v6H5v-6l2-4zm8 0l-2 4h3v6h-6v-6l2-4z"></path> -->
+      <!--   </svg> -->
         <!-- Remove the quote paragraph if you don't want quotes in the footer -->
-        <p id="quote" class="zag-text zag-transition"></p>
+        <!-- <p id="quote" class="zag-text zag-transition"></p> -->
       </div>
       <div class="flex flex-row sm:flex-col gap-4">
         {

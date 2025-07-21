@@ -147,12 +147,14 @@ const configuration = defineCollection({
       /**
        * The title displayed in the hero section.
        */
-      title: z.string().default("Zaggonaut"),
+      title: z.string().default("Sri Guru Datta Pisupati"),
 
       /**
        * The subtitle displayed in the hero section.
        */
-      subtitle: z.string().default("Retro-Inspired Theme &<br>Built for Astro"),
+      subtitle: z
+        .string()
+        .default("Something always fires the light that gets in your eyes"),
 
       /**
        * The URL of the hero image, used as a background image in the hero section.
@@ -177,7 +179,7 @@ const configuration = defineCollection({
       /**
        * The name of the site owner or author, used in various places throughout the site.
        */
-      name: z.string().default("Zaggonaut"),
+      name: z.string().default("Sri Guru Datta Pisupati"),
 
       /**
        * The GitHub profile URL of the site owner or author.
@@ -243,7 +245,7 @@ const configuration = defineCollection({
  * It loads markdown files from the `content/blogs` directory and defines the schema for each blog post.
  */
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content/blogs" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./content/blogs" }),
   schema: z
     .object({
       /**
@@ -311,58 +313,60 @@ const blog = defineCollection({
  * It loads markdown files from the `content/projects` directory and defines the schema for each project.
  */
 const project = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content/projects" }),
-  schema: z.object({
-    /**
-     * The title of the project.
-     */
-    title: z.string(),
-    
-    /**
-     * The slug for the project, used in the URL.
-     */
-    slug: z.string().optional(),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./content/projects" }),
+  schema: z
+    .object({
+      /**
+       * The title of the project.
+       */
+      title: z.string(),
 
-    /**
-     * The short description of the project, used in Open Graph metadata and as a fallback for SEO.
-     */
-    description: z.string(),
+      /**
+       * The slug for the project, used in the URL.
+       */
+      slug: z.string().optional(),
 
-    /**
-     * The long description of the project, used in Open Graph metadata and as a fallback for SEO.
-     */
-    longDescription: z.string().optional(),
+      /**
+       * The short description of the project, used in Open Graph metadata and as a fallback for SEO.
+       */
+      description: z.string(),
 
-    /**
-     * The URL of the card image for social media sharing.
-     */
-    cardImage: z.string().url().optional(),
+      /**
+       * The long description of the project, used in Open Graph metadata and as a fallback for SEO.
+       */
+      longDescription: z.string().optional(),
 
-    /**
-     * The tags associated with the project, used for categorization and filtering.
-     */
-    tags: z.array(z.string()).optional(),
+      /**
+       * The URL of the card image for social media sharing.
+       */
+      cardImage: z.string().url().optional(),
 
-    /**
-     * The github repository URL for the project.
-     */
-    githubUrl: z.string().url().optional(),
+      /**
+       * The tags associated with the project, used for categorization and filtering.
+       */
+      tags: z.array(z.string()).optional(),
 
-    /**
-     * The live demo URL for the project, if applicable.
-     */
-    liveDemoUrl: z.string().url().optional(),
+      /**
+       * The github repository URL for the project.
+       */
+      githubUrl: z.string().url().optional(),
 
-    /**
-     * The timestamp of the project, used for sorting and displaying the date.
-     */
-    timestamp: z.date().transform((val) => new Date(val)),
+      /**
+       * The live demo URL for the project, if applicable.
+       */
+      liveDemoUrl: z.string().url().optional(),
 
-    /**
-     * Whether the project is featured on the homepage.
-     */
-    featured: z.boolean().default(false),
-  }).transform((data) => {
+      /**
+       * The timestamp of the project, used for sorting and displaying the date.
+       */
+      timestamp: z.date().transform((val) => new Date(val)),
+
+      /**
+       * Whether the project is featured on the homepage.
+       */
+      featured: z.boolean().default(false),
+    })
+    .transform((data) => {
       const slug =
         data.slug ??
         data.title

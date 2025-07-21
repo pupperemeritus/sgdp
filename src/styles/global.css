@@ -10,9 +10,10 @@
   font-weight: 200 900;
   src: url(https://cdn.jsdelivr.net/fontsource/fonts/literata:vf@latest/latin-opsz-normal.woff2)
     format("woff2-variations");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
-    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -20,36 +21,37 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/press-start-2p@latest/latin-400-normal.woff2)
+  src:
+    url(https://cdn.jsdelivr.net/fontsource/fonts/press-start-2p@latest/latin-400-normal.woff2)
       format("woff2"),
     url(https://cdn.jsdelivr.net/fontsource/fonts/press-start-2p@latest/latin-400-normal.woff)
       format("woff");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
-    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 
 /*
  Welcome! Zaggonaut colors originate from these theme variables, feel
  free to change them! 
 */
-
 @theme {
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-mono: "Fira Code", ui-monospace, monospace;
   --font-display: "press-start-2p", ui-monospace, monospace;
-  --font-serif: "Literata Variable", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --color-zag-dark: var(--color-neutral-900);
-  --color-zag-dark-opaque: oklch(from var(--color-neutral-900) l c h / 0.5);
-  --color-zag-light: var(--color-neutral-100);
-  --color-zag-light-opaque: oklch(from var(--color-neutral-100) l c h / 0.5);
-  --color-zag-dark-muted: var(--color-neutral-600);
-  --color-zag-light-muted: var(--color-neutral-400);
-  --color-zag-accent-light: var(--color-emerald-400);
-  --color-zag-accent-light-muted: var(--color-emerald-300);
-  --color-zag-accent-dark: var(--color-emerald-600);
-  --color-zag-accent-dark-muted: var(--color-emerald-800);
+  --font-serif:
+    "Fira Sans", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --color-zag-dark: #2e3440;
+  --color-zag-dark-opaque: oklch(from #2e3440 l c h / 0.5);
+  --color-zag-light: #eceff4;
+  --color-zag-light-opaque: oklch(from #eceff4 l c h / 0.5);
+  --color-zag-dark-muted: #3b4252;
+  --color-zag-light-muted: #d8dee9;
+  --color-zag-accent-light: #5e81ac;
+  --color-zag-accent-light-muted: #81a1c1;
+  --color-zag-accent-dark: #88c0d0;
+  --color-zag-accent-dark-muted: #2e3440;
 }
-
 @layer base {
   :root {
     --zag-stroke: 2px;
@@ -66,11 +68,16 @@
   .zag-transition {
     @media (prefers-reduced-motion: no-preference) {
       transition:
-        background-color var(--zag-transition-duration) var(--zag-transition-timing-function),
-        color var(--zag-transition-duration) var(--zag-transition-timing-function),
-        fill var(--zag-transition-duration) var(--zag-transition-timing-function),
-        border-color var(--zag-transition-duration) var(--zag-transition-timing-function),
-        transform var(--zag-transition-duration) var(--zag-transition-timing-function);
+        background-color var(--zag-transition-duration)
+          var(--zag-transition-timing-function),
+        color var(--zag-transition-duration)
+          var(--zag-transition-timing-function),
+        fill var(--zag-transition-duration)
+          var(--zag-transition-timing-function),
+        border-color var(--zag-transition-duration)
+          var(--zag-transition-timing-function),
+        transform var(--zag-transition-duration)
+          var(--zag-transition-timing-function);
     }
   }
 
@@ -87,7 +94,7 @@
       background-color: var(--color-zag-light);
     }
   }
-  
+
   .zag-text {
     color: var(--color-zag-dark);
     :where(.dark, .dark *) & {
@@ -149,8 +156,17 @@
     display: block;
     z-index: -1;
     background:
-      linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) bottom right / var(--dot-space) var(--dot-space),
-      linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) bottom right / var(--dot-space) var(--dot-space),
+      linear-gradient(
+          90deg,
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        bottom right / var(--dot-space) var(--dot-space),
+      linear-gradient(
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        bottom right / var(--dot-space) var(--dot-space),
       var(--dot-color);
     pointer-events: none;
   }
@@ -169,15 +185,192 @@
     height: 100%;
     display: block;
     z-index: -1;
-    background: linear-gradient(159deg, var(--color-zag-light) 0%, var(--color-zag-light) 50%, var(--color-zag-light-opaque) 100%);
+    background: linear-gradient(
+      159deg,
+      var(--color-zag-light) 0%,
+      var(--color-zag-light) 50%,
+      var(--color-zag-light-opaque) 100%
+    );
     pointer-events: none;
   }
 
   :where(.dark, .dark *) .hover-zag-dotted-grid:hover::after {
-    background: linear-gradient(159deg, var(--color-zag-dark) 0%, var(--color-zag-dark) 50%, var(--color-zag-dark-opaque) 100%);
+    background: linear-gradient(
+      159deg,
+      var(--color-zag-dark) 0%,
+      var(--color-zag-dark) 50%,
+      var(--color-zag-dark-opaque) 100%
+    );
   }
 
   .opsz {
     font-variation-settings: "opsz" 72;
   }
+}
+
+/* Minimal Full-Width Layout - Complete Solution */
+
+/* Reset and base */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Universal full-width container */
+.full-width,
+header,
+main,
+section,
+footer {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding-left: clamp(1rem, 4vw, 8rem);
+  padding-right: clamp(1rem, 4vw, 8rem);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Override existing classes */
+.zag-responsive-container,
+.w-full-vw {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding-left: clamp(1rem, 4vw, 8rem) !important;
+  padding-right: clamp(1rem, 4vw, 8rem) !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Top menu/nav spreads full width */
+nav,
+.menu,
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navbar items distribution */
+nav > *,
+.navbar > *,
+.menu > * {
+  flex: 0 0 auto;
+}
+
+/* Center navbar item gets remaining space */
+nav > *:nth-child(2),
+.navbar > *:nth-child(2),
+.menu > *:nth-child(2) {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+/* Mobile menu fixes */
+@media (min-width: 769px) {
+  .hamburger,
+  .mobile-menu-toggle,
+  [class*="hamburger"],
+  [class*="mobile"] {
+    display: none !important;
+  }
+}
+
+/* Content spacing */
+.content {
+  margin: 0 auto;
+}
+
+/* Responsive text */
+body {
+  font-size: clamp(1rem, 1rem + 0.3vw, 1.3rem);
+  line-height: 2;
+}
+
+/* Simple Content Width Constraints - Additive to your existing CSS */
+
+/* Only add constraints to content areas, leave layout structure alone */
+
+/* Blog and project content should be wider for better layout */
+.blog-content,
+.project-content {
+  max-width: 85vw;
+  margin: 0 auto;
+}
+
+/* Prose component constraint - wider for better readability */
+.prose,
+[class*="prose"] {
+  max-width: 85vw;
+  margin: 0 auto;
+}
+
+/* Override the max-w-none class specifically for content sections */
+.zag-responsive-text.max-w-none {
+  max-width: 85vw !important;
+  margin: 0 auto !important;
+}
+
+/* Article/post containers */
+article,
+.article-content {
+  max-width: 85vw;
+  margin: 0 auto;
+}
+
+/* Allow images to be slightly wider than text */
+.prose img,
+.blog-content img,
+.project-content img,
+article img {
+  max-width: 100ch;
+  margin-left: calc(50% - 50ch);
+  margin-right: calc(50% - 50ch);
+  width: 100%;
+}
+
+/* Utility classes for when you need them */
+.constrain-content {
+  max-width: 85ch;
+  margin: 0 auto;
+}
+
+.wide-content {
+  max-width: 100ch;
+  margin: 0 auto;
+}
+
+/* Breakout utility for full-width elements within constrained content */
+.breakout {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(1rem, 4vw, 8rem);
+  padding-right: clamp(1rem, 4vw, 8rem);
+}
+
+/* Simple Font Size Scaler - Maintains All Proportions */
+:root {
+  --font-scale: 1.08; /* Adjust as needed */
+  --min-font-size: 0.9rem;
+  --max-font-size: 1.5rem;
+}
+
+/* Use clamp to make font-size responsive */
+* {
+  font-size: clamp(
+    calc(var(--min-font-size) * var(--font-scale)),
+    calc(1rem * var(--font-scale) + 0.2vw),
+    calc(var(--max-font-size) * var(--font-scale))
+  ) !important;
 }

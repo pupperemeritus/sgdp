@@ -1,0 +1,383 @@
+---
+title: GSoC Blog Compilation
+slug: gsoc-blog-compilation
+description: A compilation of weekly briefings during my GSoC experience
+longDescription: This is a weekwise snapshot of my work at StingraySoftware during Google Summer of Code 2023
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["code", "python", "astropy", "numpy", "stingray", "open source"]
+readTime: 45
+featured: False
+timestamp: 2025-07-21T02:39:03+05:30
+---
+
+# Week 1
+
+## Brief
+
+Week 1 has been quite eventful with me creating a Lomb Scargle Fourier Transform function and get a working class for Lomb Scargle Cross Spectrum and Power Spectrum.
+
+I inherited my LS cross spectrum from the regular cross spectrum class. Had to rewrite the `constructor`, `initial_checks` , `make_crossspectrum`, `_make_auxil_pds` and `_initialize_empty`. And also wrote a new `_ls_cross` method which just returns the frequencies and cross spectra for given light curves and it is an internal function only to be used by the class.
+
+The original slow implementation has been completed. I am still working on the fast version.
+
+As this is not a project that can be completed in a bunch of small PRs, I will push to a single PR which will be merged after completion of the project. The following draft PR is the one to which I will be pushing to.
+
+[https://github.com/StingraySoftware/stingray/pull/737](https://github.com/StingraySoftware/stingray/pull/737)
+
+## Details
+
+The following are the APIs for the classes
+
+### Cross Spectrum
+
+```python
+Make a cross spectrum from an unevenly sampled light curve.
+You can also make an empty :class:`Crossspectrum` object to populate with your
+own Fourier-transformed data (this can sometimes be useful when making
+binned power spectra).
+
+Parameters
+----------
+data1: :class:`stingray.Lightcurve` or :class:`stingray.events.EventList`, optional, default ``None``
+    The dataset for the first channel/band of interest.
+
+data2: :class:`stingray.Lightcurve` or :class:`stingray.events.EventList`, optional, default ``None``
+    The dataset for the second, or "reference", band.
+
+norm: {``frac``, ``abs``, ``leahy``, ``none``}, default ``none``
+    The normalization of the (real part of the) cross spectrum.
+
+power_type: string, optional, default ``real``
+    Parameter to choose among complete, real part and magnitude of the cross spectrum.
+
+fullspec: boolean, optional, default ``False``
+    If False, keep only the positive frequencies, or if True, keep all of them .
+
+Other Parameters
+----------------
+dt: float
+    The time resolution of the light curve. Only needed when constructing
+    light curves in the case where ``data1``, ``data2`` are
+    :class:`EventList` objects
+
+skip_checks: bool
+    Skip initial checks, for speed or other reasons (you need to trust your
+    inputs!)
+
+min_freq : float
+    Minimum frequency to take the Lomb-Scargle Fourier Transform
+
+max_freq: float
+    Maximum frequency to take the Lomb-Scargle Fourier Transform
+
+df : float
+    The time resolution of the light curve. Only needed where ``data1``, ``data2`` are
+
+method : str
+    The method to be used by the Lomb-Scargle Fourier Transformation function. `fast`
+    and `slow` are the alloowed values. Default is `fast`. fast uses the optimized Press
+    and Rybicki O(n*log(n))
+
+Attributes
+----------
+freq: numpy.ndarray
+    The array of mid-bin frequencies that the Fourier transform samples
+
+power: numpy.ndarray
+    The array of cross spectra (complex numbers)
+
+power_err: numpy.ndarray
+    The uncertainties of ``power``.
+    An approximation for each bin given by ``power_err= power/sqrt(m)``.
+    Where ``m`` is the number of power averaged in each bin (by frequency
+    binning, or averaging more than one spectra). Note that for a single
+    realization (``m=1``) the error is equal to the power.
+
+df: float
+    The frequency resolution
+
+m: int
+    The number of averaged cross-spectra amplitudes in each bin.
+
+n: int
+    The number of data points/time bins in one segment of the light
+    curves.
+
+k: array of int
+    The rebinning scheme if the object has been rebinned otherwise is set to 1.
+
+nphots1: float
+    The total number of photons in light curve 1
+
+nphots2: float
+    The total number of photons in light curve 2
+```
+
+### Power Spectrum
+
+```python
+Make a :class:`LombScarglePowerspectrum` (also called periodogram) from a unevenly sampled (binned)
+light curve. Periodograms can be normalized by either Leahy normalization,
+fractional rms normalization, absolute rms normalization, or not at all.
+
+You can also make an empty :class:`LombScarglePowerspectrum` object to populate with
+your own fourier-transformed data (this can sometimes be useful when making
+binned power spectra).
+
+Parameters
+----------
+data: :class:`stingray.lightcurve.Lightcurve` or :class:`stingray.events.EventList` object, optional, default ``None``
+    The light curve data to be Fourier-transformed.
+
+norm: {"leahy" | "frac" | "abs" | "none" }, optional, default "frac"
+    The normaliation of the power spectrum to be used. Options are
+    "leahy", "frac", "abs" and "none", default is "frac".
+
+Other Parameters
+----------------
+dt: float
+    The time resolution of the light curve. Only needed when constructing
+    light curves in the case where ``data`` is a
+    :class:`EventList` object
+
+skip_checks: bool
+    Skip initial checks, for speed or other reasons (you need to trust your
+    inputs!).
+
+min_freq : float
+    Minimum frequency to take the Lomb-Scargle Fourier Transform
+
+max_freq: float
+    Maximum frequency to take the Lomb-Scargle Fourier Transform
+
+df : float
+    The time resolution of the light curve. Only needed where ``data`` is a :class`stingray.Eventlist` object
+
+method : str
+    The method to be used by the Lomb-Scargle Fourier Transformation function. `fast`
+    and `slow` are the alloowed values. Default is `fast`. fast uses the optimized Press
+    and Rybicki O(n*log(n))
+
+Attributes
+----------
+norm: {"leahy" | "frac" | "abs" | "none" }
+    The normalization of the power spectrum.
+
+freq: numpy.ndarray
+    The array of mid-bin frequencies that the Fourier transform samples.
+
+power: numpy.ndarray
+    The array of normalized squared absolute values of Fourier
+    amplitudes.
+
+power_err: numpy.ndarray
+    The uncertainties of ``power``.
+    An approximation for each bin given by ``power_err= power/sqrt(m)``.
+    Where ``m`` is the number of power averaged in each bin (by frequency
+    binning, or averaging power spectra of segments of a light curve).
+    Note that for a single realization (``m=1``) the error is equal to the
+    power.
+
+df: float
+    The frequency resolution.
+
+m: int
+    The number of averaged powers in each bin.
+
+n: int
+    The number of data points in the light curve.
+
+nphots: float
+    The total number of photons in the light curve.
+```
+
+---
+
+# Week 2-3
+
+## Brief
+
+These weeks I refactored the `LombScargleCrossspectrum` and `LombScarglePowerspectrum` classes to accommodate the fast algorithm which went smoothly.
+However when it comes to the fast algorithm. I had tunnel vision and unconsciously made the `lsft_fast` function compute the power spectrum instead of the fourier transform. Right now I am working towards isolating the algorithm to compute the fourier transform using the [Press and Rybicki optimizations](https://ui.adsabs.harvard.edu/abs/1989ApJ...338..277P/abstract>).
+
+## Challenges Faced
+
+Integrating the optimization to the existing slow algorithm is giving me a bit of trouble. I'm still figuring out how to add the optimizations. If this is done, I can move onto making the time lag, phase lag functions and then onto testing and documentation.
+
+## Details
+
+Added the following parameters to both the classes in order to accommodate choice between the fast and slow algorithm.
+
+```python
+method : str
+        The method to be used by the Lomb-Scargle Fourier Transformation function. `fast`
+        and `slow` are the allowed values. Default is `fast`. fast uses the optimized Press
+        and Rybicki O(n*log(n))
+
+    oversampling : float, optional, default: 5
+        Interpolation Oversampling Factor (for the fast algorithm)
+```
+
+For full code refer [https://github.com/StingraySoftware/stingray/pull/737](https://github.com/StingraySoftware/stingray/pull/737)
+
+Most important part of the process is the Lomb Scargle Fourier Transform.
+The wrapper class is trivial, they only wrap the fast and slow lomb scargle fourier transform functions.
+
+# Results using the slow algorithm
+
+## On synthetic data
+
+```python
+rand = np.random.default_rng(42)
+    n = 100
+    t = np.sort(rand.random(n)) * n
+    y = np.cos(2 * np.pi * 5 * t) + 0.01 * rand.standard_normal(n)
+    y -= np.min(y)
+    lc1 = Lightcurve(t, y, err_dist="poisson")
+    y2 = np.cos(2 * np.pi * 5.0 * (t)) + 0.01 * rand.standard_normal(n)
+    y2 -= np.min(y2)
+    lc2 = Lightcurve(t, y2, err_dist="poisson")
+```
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xgf4z7yaxi81aoxj9dkx.png)
+
+## On real data
+
+### The lightcurve
+
+[Link to data at heasarc.gfsc.nasa.gov](https://heasarc.gsfc.nasa.gov/FTP/nicer/data/obs/2018_03//1200120106/xti/event_cl/ni1200120106_0mpu7_cl.evt.gz>)
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w3dz8zsjk2ika71ytlkx.png)
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/167buf3woin2hplbo89r.png)
+
+---
+
+# Week 4
+
+## Brief
+
+This week I successfully finished implementing the fast algorithm. Now my `LombScargleCrossspectrum` and `LombScarglePowerspectrum` are that much closer to completion. Only things left to sort out/implement are time lags and phase lag functions and checking the phase of the output.
+
+## Details
+
+Testing on the following synthetic data has been conducted to compare the outputs with the existing cross spectrum and power spectrum for evenly spaced data first then checking the outputs of the lomb scargle variants on unevenly sampled data
+
+```
+rand = np.random.default_rng(42)
+n = 1000
+t = np.linspace(0, 10, n)
+y = np.sin(2 * np.pi * 3.0 * t) + 0.1 * rand.standard_normal(n)
+y2 = np.sin(2 * np.pi * 3.0 * t) + 0.1 * rand.standard_normal(n)
+y -= np.min(y)
+y2 -= np.min(y2)
+```
+
+## The Cross spectra for evenly sampled data
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ldcxxcpq760ym5yph7jv.png)
+
+## The time lags for evenly sampled data
+
+As it is evident the time lags need work.
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/sknrib3nkos5tcnojlng.png)
+
+## The power spectra for evenly sampled data
+
+One quirk is that the power spectrum class is returning the power spectrum with a negative sign. This is a known bug. The values otherwise are within margin of error.
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vtf835ktnxo9dn83iy55.png)
+
+## The Lomb Scargle cross spectrum and power spectrum when data is unevenly sampled
+
+`t = np.sort(rand.random(n))*10`
+
+### The cross spectrum
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bzddaq7u9naiskry0x7i.png)
+
+### The power spectrum
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yfz6sav17mw51yas49he.png)
+
+### The time lags
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qkyr5to5lbkxm2s2xbi9.png)
+
+They are off here too. Which will be fixed in the coming week.
+
+For exhaustive testing code refer
+
+<Gist id="5edfe636312947d6e292713760059283" />
+
+---
+
+# Week 5-8
+
+## Brief
+
+I have worked on creating unit tests for the Lomb Scargle Cross Spectrum class, cross verifying the algorithm by comparing with the papers and fixed typos in docstrings. Apologies for the delay. Had my exams.
+
+## Details
+
+I have noticed a few faults in both the fast and the slow algorithms. I have gone back to the drawing board and tried to address those issues by following the papers as closely as possible. All the changes are visible in the following draft pull request.
+[https://github.com/StingraySoftware/stingray/pull/737](https://github.com/StingraySoftware/stingray/pull/737)
+
+After the fixing, the fast and the slow algorithm have started giving very similar outputs. I am starting to suspect that the time lags might be broken in the algorithms themselves. It is starting to get a little suspicious when different methods are giving very similar results and they are still not what that is expected. Last time around the fast and slow algorithms have given different results. After cross verifying with the papers, The results from both have fast and slow algorithms converged.
+
+To keep the project sailing along while I wait for confirmation that this is an issue with the implementation or the algorithm , I have decided to work on writing unit tests for the various classes and methods. Furthermore I also worked on fixing the docstrings.
+
+<Gist id="fc0567591cb65f9035f37728df84f04a" />
+
+# Week 9-10
+
+Big progress on the front of algorithm working. Turns out there wasn't that much of a problem in the algorithm. I just had to subtract the mean from the data before taking the fourier transform. The Lomb Scargle seems to work on data that has mean subtracted from it. Furthermore they dont seem to work that well or at all in full spectrum.
+The LSFT also is highly sensitive to the time intervals that are input to it. I have found some more clues as to how to make it even better. I will expound upon this further within 2 weeks since my final exams are going on and I have limited time.
+
+Minimum Working Code Example
+
+```python
+def data_func(time, freq=1.2324235252):
+    return  2 * np.sin(2 * np.pi * time * freq)
+
+t0 = 0
+t1 = 100
+dt = 0.1
+
+np.random.seed(43)
+time_uniform = np.arange(t0, t1, dt)
+time_nonuniform = np.sort(np.random.uniform(t0, t1, time_uniform.size))
+
+npft = np.fft.fft(data_func(time_uniform))
+npfreqs = np.fft.fftfreq(npft.size, dt)
+npft = npft[npfreqs>=0]
+npfreqs = npfreqs[npfreqs>=0]
+lsfreqs = np.linspace(np.min(npfreqs), np.max(npfreqs), npfreqs.size * 8)
+lsfreqs = lsfreqs[lsfreqs>=0]
+np.random.seed(43)
+lsft_slow_arr = lsft_slow(data_func(time_nonuniform), time_nonuniform, lsfreqs,sign=-1, fullspec=False)
+lsft_fast_arr = lsft_fast(data_func(time_nonuniform), time_nonuniform, lsfreqs,sign=-1, fullspec=False,oversampling=10)
+plt.plot(time_nonuniform,lsft_slow_inv(lsft_slow_arr,freqs=time_nonuniform, t=lsfreqs).real ,alpha=0.5,label="Slow")
+plt.plot(time_nonuniform,lsft_fast_inv(lsft_fast_arr,freqs=time_nonuniform, t=lsfreqs).real,alpha=0.5,label="Fast")
+plt.plot(time_nonuniform,data_func(time_nonuniform),label="Original Data")
+plt.legend()
+plt.xlim(0,10)
+plt.ylim(-3,3)
+```
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/g10l11a0u36xzhtkq5n5.png)
+
+# Week 11-13
+
+I am reaching the final stages of my project well ahead of the schedule.
+
+Both the Crosspectrum and Powerspectrum classes, the Lomb Scargle Fourier Transform and Basic Documentation have been completed. Tests are almost done too
+
+I have double checked with Matteo that the results are consistent using multiple examples and they are close to expected results.
+
+The following are the documentation notebooks on how to use the classes.
+
+<Gist id="f917bd362ec4ef9133c380e97c3139b4" />
+
+<Gist id="36164c2ddf75dc95e37e06b07f2e153f" />
