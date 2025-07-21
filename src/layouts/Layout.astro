@@ -9,35 +9,56 @@ import { ClientRouter } from "astro:transitions";
 <html lang="en">
   <head>
     <ClientRouter/>
+
+    <script>
+      // Runs before CSS, prevents FOUC
+      (function () {
+        const theme = localStorage.getItem("theme");
+        if (
+          theme === "dark" ||
+          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    
     <script is:inline>
-  function handleToggleClick() {
-    const el = document.documentElement;
-    const isDark = el.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }
+      function applyTheme() {
+        const theme = localStorage.getItem("theme") || "dark";
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      }
 
-  function bindToggle() {
-    const btn = document.getElementById('themeToggle');
-    if (btn && !btn.hasAttribute('data-listener')) {
-      btn.addEventListener('click', handleToggleClick);
-      btn.setAttribute('data-listener', 'true');
-    }
-  }
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      }
 
-  document.addEventListener('astro:page-load', bindToggle);
-  document.addEventListener('astro:after-swap', bindToggle);
+      function bindToggle() {
+        const btn = document.getElementById("themeToggle");
+        if (btn && !btn.dataset.bound) {
+          btn.addEventListener("click", toggleTheme);
+          btn.dataset.bound = "true";
+        }
+      }
 
-  bindToggle();
-  </script> 
-    <script is:inline>
-    function applyTheme() {
-      localStorage.getItem('theme') === 'dark'
-        ? document.documentElement.classList.add('dark')
-        : document.documentElement.classList.remove('dark');
-    }
-    applyTheme();
-    document.addEventListener('astro:after-swap', applyTheme);
-  </script>
+      // On full load
+      applyTheme();
+      bindToggle();
+
+      // On ClientRouter transitions
+      document.addEventListener("astro:page-load", () => {
+        applyTheme();
+        bindToggle();
+      });
+      document.addEventListener("astro:after-swap", () => {
+        applyTheme();  // 🔁 re-apply theme every time
+        bindToggle();
+      });
+    </script>
+ 
+
   <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

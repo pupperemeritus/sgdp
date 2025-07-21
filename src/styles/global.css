@@ -41,17 +41,37 @@
   --font-display: "press-start-2p", ui-monospace, monospace;
   --font-serif:
     "Fira Sans", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --color-zag-dark: #2e3440;
-  --color-zag-dark-opaque: oklch(from #2e3440 l c h / 0.5);
-  --color-zag-light: #eceff4;
-  --color-zag-light-opaque: oklch(from #eceff4 l c h / 0.5);
-  --color-zag-dark-muted: #3b4252;
-  --color-zag-light-muted: #d8dee9;
-  --color-zag-accent-light: #5e81ac;
-  --color-zag-accent-light-muted: #81a1c1;
-  --color-zag-accent-dark: #88c0d0;
-  --color-zag-accent-dark-muted: #2e3440;
+
+  /* === Neutral Base Colors === */
+  --color-zag-dark: #2e3440; /* Nord0 */
+  --color-zag-dark-muted: #3b4252; /* Nord1 */
+  --color-zag-dark-opaque: oklch(from #2e3440 l c h / 0.7);
+
+  --color-zag-light: #eceff4; /* Nord6 */
+  --color-zag-light-muted: #d8dee9; /* Nord4 */
+  --color-zag-light-opaque: oklch(from #eceff4 l c h / 0.8);
+
+  /* === Base Accent Pair === */
+  --color-zag-accent-light: #81a1c1; /* Nord9 */
+  --color-zag-accent-light-muted: #a3b9d1; /* desaturated Nord9 */
+  --color-zag-accent-dark: #8fbcbb; /* Nord7 */
+  --color-zag-accent-dark-muted: #5e81ac; /* Nord10 */
+
+  /* === Extended Color Roles === */
+  --color-zag-red: #bf616a; /* Nord11 */
+  --color-zag-orange: #d08770; /* Nord12 */
+  --color-zag-yellow: #ebcb8b; /* Nord13 */
+  --color-zag-green: #a3be8c; /* Nord14 */
+  --color-zag-purple: #b48ead; /* Nord15 */
+
+  /* === Optional Semantic Aliases === */
+  --color-success: var(--color-zag-green);
+  --color-error: var(--color-zag-red);
+  --color-warning: var(--color-zag-orange);
+  --color-info: var(--color-zag-accent-light);
+  --color-note: var(--color-zag-purple);
 }
+
 @layer base {
   :root {
     --zag-stroke: 2px;
