@@ -1,0 +1,49 @@
+---
+title: Efficiency is Clever Laziness
+slug: eicl
+description: A batteries & kitchen sink included process & system monitor and benchmarking tool
+longDescription: A batteries & kitchen sink included process & system monitor and benchmarking tool
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["golang", "open-source", "eBPF", "CUDA", "C"]
+githubUrl: https://github.com/cogatimus/eicl
+timestamp: 2025-07-22T17:30:00+05:30
+featured: true
+---
+
+Me and my friends at Cogatimus are currently working on a swiss army knife of a tool meant for software engineers, system testers, performance nerds and servers.
+
+This project is a spiritual successor to the project of the same name we did at Hexathon 2024.
+The original idea was to monitor the power usage of the system along with some performance metrics so that every server CPU can be undervolted and overclocked to extract the maximum performance its silicon allows for.
+This will allow data centers to save millions of dollars in electricity costs and improves the speed of operations for users marginally.
+As for Gaming CPUs,
+
+EICL is a fast, modular, and lightweight system profiler and benchmarking suite built for developers, engineers, and performance nerds who want to stop guessing and start measuring. It offers a unified interface for profiling across CPU, GPU, I/O, network, memory, and runtime metrics — with extensibility and no bloat.
+
+> Think perf, but cross-platform. Think htop, but smarter. Think flame graphs, call trees, treemaps, and daemonized insights — all in one place.
+
+## 🚀 Vision
+
+EICL will eventually support all major operating systems and platforms, starting with:
+
+- ✅ Linux
+- ✅ Windows
+- ⏳ macOS, BSD, and others (planned)
+
+## Short and Long-term goals include
+
+- Hardware resource monitoring across platforms
+- CPU & GPU memory profiling
+- I/O and network profiling
+- Runtime profiling & benchmarking
+- Ray tracing benchmarks
+- Rich visualization (flame graphs, sunburst diagrams, treemaps, etc.)
+- Daemon mode for continuous service/application monitoring
+- CLI-first
+
+## 🛠️ Tech Stack
+
+- Component Tech
+- Core System Go
+- GPU Profiling Python + Triton/CUDA + HIP (TBD)
+- Visualization Web (TBD), CLI Graphing (Go)
+- Testing Go test + dedicated integration folder

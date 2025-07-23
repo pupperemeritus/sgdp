@@ -1,0 +1,47 @@
+---
+title: Astronomy Using Unevenly Sampled Data
+slug: ausd
+description: An implementation of the Lomb Scargle Fourier Transform, Cross Spectrum and Power Spectrum.
+longDescription: EE-ONE-D is a sophisticated text analysis and search system designed to find more than.
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["fourier", "spectral timing", "open-source", "scientific compute"]
+githubUrl: https://github.com/StingraySoftware/stingray/pull/737
+timestamp: 2025-07-21T17:30:00+05:30
+featured: true
+---
+
+I contributed to Stingray, an open-source Python library for astrophysical spectral timing analysis, by implementing the Lomb-Scargle Fourier transform method designed specifically for analyzing unevenly sampled astronomical data.
+
+### Technical Implementation
+
+My project focused on developing three key components:
+
+1. **Lomb-Scargle Fourier Transform:** I implemented both the original algorithm and a faster, optimized version that reduces computational complexity from O(N²) to O(N log N) based on Press & Rybicki's work. The implementation handles the irregular time intervals common in astronomical observations.
+2. **Lomb-Scargle Power Spectrum Class:** I created a class that generates power spectra from unevenly sampled data, enabling astronomers to detect periodic signals in noisy astronomical time series.
+3. **Lomb-Scargle Cross-Spectrum Class:** This class allows researchers to analyze relationships between periodic signals across different energy bands or wavelengths in astronomical observations.
+
+### Development Process
+
+I worked within Stingray's continuous integration environment, using pytest for comprehensive test coverage and following the project's coding guidelines. The implementation was reviewed by experienced maintainers including Daniela Huppenkothen and Matteo Bachetti, who provided guidance on optimization techniques and mathematical accuracy.
+
+The project was merged into the main branch in September 2023 after thorough testing and documentation.
+
+### Technical Challenges
+
+The implementation presented several mathematical and computational challenges:
+
+1. Efficiently computing trigonometric sums for large datasets
+2. Ensuring mathematical correctness in the transformation from time to frequency domains
+3. Properly handling edge cases such as zero frequency components
+4. Optimizing the algorithm for performance while maintaining numerical stability
+5. Transitioning from legacy code interfaces to Stingray's modern architecture
+
+### Significance in the subdomain of X-Ray Astronomy
+
+This implementation enables astronomers to perform frequency analysis on data from irregular observations of high-energy astronomical events like pulsar flares and X-ray binaries. Unlike standard Fourier transform methods which require evenly spaced data points, this implementation handles the real-world constraints of astronomical observations where complete data coverage is rarely possible.
+
+The tool serves as a fast preliminary analysis method for detecting periodic signals, which can then be analyzed more thoroughly with computationally intensive methods like Gaussian Processes.
+
+This project represented my first substantial contribution to a scientific open-source project, where I learned valuable lessons about test-driven development, documentation standards, and collaborative development workflows.
+
+For more detail you can refer to [my detailed report here](https://sgdp.vercel.app/blog/gsoc-project-report)

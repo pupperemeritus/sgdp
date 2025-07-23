@@ -1,0 +1,32 @@
+---
+title: Forecasting Ionospheric Scintillations over the Indian Subcontinent
+slug: fisotis
+description: A deep learning project on geospatial time series
+longDescription: EE-ONE-D is a text search tool designed to enable fuzzier searching.
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["time series", "deep learning", "graph neural networks"]
+# githubUrl: "https://github.com/pupperemeritus"
+timestamp: 2025-07-21T17:30:00+05:30
+featured: true
+---
+
+This project addresses the challenge of predicting signal disturbances affecting satellite communications over the Indian subcontinent. I researched and implemented LSTM, X-LSTM in Pytorch+Pytorch Lightning and Graphcast in Jax+Flax on a very limited dataset.
+
+The data was obtained by my college using PolaRx5 GNSS receiver which was funded through a DST grant.
+
+The project consists of three main components:
+
+- **Backend System (FastAPI)**: Handles data processing and visualization endpoints with comprehensive error handling. The implementation uses Polars in place of pandas for efficient dataframe operations and supports various visualization types including maps, time series plots, and skyplots for scintillation data.
+- **Frontend (React)**: Provides an interactive interface with filtering options, visualization controls, and data preview capabilities. The UI allows users to select parameters like date ranges, satellite IDs, and S4 thresholds to visualize scintillation patterns.
+- **Machine Learning Models**:
+  - Standard LSTM: Implemented in PyTorch Lightning with configurable layers and hidden dimensions as a control model for comparing with existing methods
+  - X-LSTM: Extended LSTM variant with improved sequence modeling capabilities
+  - GraphCast: JAX/Flax implementation leveraging graph neural networks for spatial-temporal modeling
+
+All models were trained with MLFlow tracking for experiment monitoring, with specialized preprocessing pipelines to handle the geospatial and temporal aspects of ionospheric data. The system caches intermediate preprocessing results to improve efficiency given the limited dataset size.
+
+The architecture emphasizes modularity, with separate components for data loading, visualization, and model training that can be extended or modified independently. Despite dataset limitations, the models demonstrate promising capabilities for short-term scintillation forecasting.
+
+The major bottleneck in model performance was that I only had data from one station, therefore making a horrible grid of points.
+
+I am not allowed to share more details as the project and data is not open to public, I have shared up to what is allowed.
