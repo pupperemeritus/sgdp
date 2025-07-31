@@ -14,7 +14,7 @@ const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
 ---
 
 <div
-  class="group relative flex gap-x-5 rounded-lg p-4 transition-colors hover:bg-[var(--theme-code-bg)] sm:gap-x-8"
+  class="group zag-transition relative flex gap-x-5 rounded-lg p-4 transition-colors hover:bg-[var(--theme-code-bg)] sm:gap-x-8"
 >
   <div class="flex flex-col items-center">
     <div
@@ -43,7 +43,11 @@ const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
       <div class="flex shrink-0 gap-4">
         {
           githubUrl && (
-            <Anchor url={githubUrl} class="text-sm" external>
+            <Anchor
+              url={githubUrl}
+              class="has-text-scramble zag-responsive-text text-sm"
+              external
+            >
               GitHub
             </Anchor>
           )
@@ -51,7 +55,11 @@ const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
         {
           // UPDATED: Conditional check for `liveDemoUrl`
           liveUrl && (
-            <Anchor url={liveUrl} class="text-sm" external>
+            <Anchor
+              url={liveUrl}
+              class="has-text-scramble zag-responsive-text text-sm"
+              external
+            >
               Demo
             </Anchor>
           )
@@ -62,7 +70,7 @@ const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
     <div class="mt-3 flex flex-wrap gap-2">
       {
         tags.map((tag) => (
-          <span class="-zag-text -zag-bg flex-shrink-0 px-2 py-1 text-sm font-semibold">
+          <span class="-zag-text zag-transition -zag-bg flex-shrink-0 px-2 py-1 text-sm font-semibold">
             {tag}
           </span>
         ))
