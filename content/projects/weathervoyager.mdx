@@ -3,10 +3,9 @@ title: WeatherVoyageR
 slug: wthrvygr
 description: An R and Shiny project for analyzing and visualizing historical weather data across India.
 longDescription: A comprehensive workflow to fetch, clean, analyze, and visualize decades of GSOD weather data for Indian stations using R and Shiny.
-cardImage: "https://i.imgur.com/Sf9B4s9.png"
-tags:
-  ["r", "shiny", "data analysis", "visualization", "weather", "data pipeline"]
-githubUrl: ""
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["r", "shiny", "data analysis", "visualization", "data pipeline"]
+githubUrl: "https://github.com/pupperemeritus/WeatherVoyageR"
 timestamp: 2023-11-15T14:00:00+05:30
 featured: true
 ---
@@ -23,12 +22,12 @@ The core objective is to make decades of historical weather data accessible and 
 
 A significant portion of this project is dedicated to a multi-step pipeline that ensures the data is clean, organized, and analysis-ready.
 
-1.  **Automated Download & Extraction**: A Python script kicks off the process by automatically downloading yearly `tar.gz` archives (1929–2023) from the NCEI/NOAA data source. It uses parallel processing to speed up the task and cleans up the archives afterward.
-2.  **Filtering for India**: R scripts take over to process the extracted files, first organizing the global data by station and then filtering for Indian stations. To ensure data quality, only stations with at least **four years** of records are kept.
-3.  **Cleaning & Transformation**: The combined Indian data undergoes rigorous cleaning.
-    - **Missing Values**: Placeholder values like `9999.9` are replaced with `NA`, and columns with over 20% missing data are dropped.
-    - **Unit Conversion**: All measurements are standardized to SI units. For instance, temperature is converted from Fahrenheit to Celsius using the formula: $T_C = (T_F - 32) \times \frac{5}{9}$.
-    - **Feature Engineering**: The cryptic 6-digit `FRSHTT` (Fog, Rain, Snow, etc.) bitmask is decoded into six clear, separate binary columns, making event-based analysis straightforward.
+1. **Automated Download & Extraction**: A Python script kicks off the process by automatically downloading yearly `tar.gz` archives (1929–2023) from the NCEI/NOAA data source. It uses parallel processing to speed up the task and cleans up the archives afterward.
+2. **Filtering for India**: R scripts take over to process the extracted files, first organizing the global data by station and then filtering for Indian stations. To ensure data quality, only stations with at least **four years** of records are kept.
+3. **Cleaning & Transformation**: The combined Indian data undergoes rigorous cleaning.
+   - **Missing Values**: Placeholder values like `9999.9` are replaced with `NA`, and columns with over 20% missing data are dropped.
+   - **Unit Conversion**: All measurements are standardized to SI units. For instance, temperature is converted from Fahrenheit to Celsius using the formula: $T_C = (T_F - 32) \times \frac{5}{9}$.
+   - **Feature Engineering**: The cryptic 6-digit `FRSHTT` (Fog, Rain, Snow, etc.) bitmask is decoded into six clear, separate binary columns, making event-based analysis straightforward.
 
 The final, polished dataset is saved as `cleaned_data.csv`, ready for analysis.
 
