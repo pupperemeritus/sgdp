@@ -1,0 +1,80 @@
+---
+import { getCollection } from "astro:content";
+import { getConfigurationCollection } from "../../lib/utils";
+import Section from "../../components/common/Section.astro";
+import ExperienceSnippet from "../../components/ExperienceSnippet.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const experience = (await getCollection("experience")).sort(
+  (a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf(),
+);
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{config.experienceMeta.title}</title>
+    <meta
+      name="description"
+      content={config.experienceMeta.longDescription ??
+        config.experienceMeta.description}
+    />
+    <meta property="og:title" content={config.experienceMeta.title} />
+    <meta
+      property="og:description"
+      content={config.experienceMeta.description}
+    />
+    {
+      config.experienceMeta.keywords && (
+        <meta
+          name="keywords"
+          content={config.experienceMeta.keywords.join(", ")}
+        />
+      )
+    }
+    {
+      config.experienceMeta.cardImage && (
+        <meta property="og:image" content={config.experienceMeta.cardImage} />
+      )
+    }
+    <meta property="og:url" content={`${config.site.baseUrl}/projects`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={config.experienceMeta.title} />
+    <meta
+      name="twitter:description"
+      content={config.experienceMeta.description}
+    />
+    {
+      config.experienceMeta.cardImage && (
+        <meta name="twitter:image" content={config.experienceMeta.cardImage} />
+      )
+    }
+    <meta http-equiv="content-language" content="en" />
+    <meta name="language" content="English" />
+    <link rel="canonical" href={`${config.site.baseUrl}/experiences`} />
+  </Fragment>
+  <Section class="my-8 py-4">
+    <div class="flex items-center gap-4 pt-8 pb-16">
+      <h1 class="font-display text-3xl leading-loose sm:text-4xl">
+        {config.texts.experienceName}
+      </h1>
+    </div>
+    <ul>
+      {
+        experience.map((experience) => (
+          <li>
+            <ExperienceSnippet
+              title={experience.data.title}
+              description={experience.data.description}
+              url={`${config.site.baseUrl}/experience/${experience.data.slug}`}
+              tags={experience.data.tags ?? []}
+              startMonthYear={experience.data.startMonthYear}
+              endMonthYear={experience.data.endMonthYear}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+</Layout>

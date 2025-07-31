@@ -1,0 +1,40 @@
+---
+import type { ExperienceFrontmatter } from "../../lib/types";
+import { getConfigurationCollection } from "../../lib/utils";
+import Anchor from "../common/Anchor.astro";
+import ExperienceSnippet from "../ExperienceSnippet.astro";
+
+type Props = {
+  featuredExperiences: Array<ExperienceFrontmatter>;
+};
+
+const { featuredExperiences } = Astro.props;
+const { data: config } = await getConfigurationCollection();
+---
+
+<div class="zag-border-b w-full"></div>
+<div class="flex w-full items-center justify-between">
+  <h3 class="font-display text-lg leading-loose sm:text-xl">
+    {config.texts.experienceName}
+  </h3>
+  <Anchor url="/experience" class="has-text-scramble text-base"
+    >{config.texts.viewAll}</Anchor
+  >
+</div>
+<ul class="my-8">
+  {
+    (featuredExperiences.length === 0 && <p>{config.texts.noExperiences}</p>) ||
+      featuredExperiences.map((experience: ExperienceFrontmatter) => (
+        <li>
+          <ExperienceSnippet
+            title={experience.title}
+            description={experience.description}
+            url={experience.url}
+            startMonthYear={experience.startMonthYear}
+            endMonthYear={experience.endMonthYear}
+            tags={experience.tags ?? []}
+          />
+        </li>
+      ))
+  }
+</ul>

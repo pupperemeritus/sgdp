@@ -1,15 +1,13 @@
 ---
-import { getConfigurationCollection, processArticleDate } from "../lib/utils";
-import type { ArticleFrontmatter } from "../lib/types";
-import Section from "../components/common/Section.astro";
+import { getConfigurationCollection } from "../lib/utils";
+import type { ExperienceFrontmatter } from "../lib/types";
 import Prose from "../components/Prose.astro";
 import Layout from "./Layout.astro";
+import Section from "../components/common/Section.astro";
 import "../styles/global.css";
-
-type Props = { frontmatter: ArticleFrontmatter };
+type Props = { frontmatter: ExperienceFrontmatter };
 
 const { frontmatter } = Astro.props;
-const articleDate = processArticleDate(frontmatter.timestamp);
 const { data: config } = await getConfigurationCollection();
 ---
 
@@ -37,7 +35,7 @@ const { data: config } = await getConfigurationCollection();
     }
     <meta
       property="og:url"
-      content={`${config.site.baseUrl}/blog/${frontmatter.slug}`}
+      content={`${config.site.baseUrl}/experience/${frontmatter.slug}`}
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -51,55 +49,43 @@ const { data: config } = await getConfigurationCollection();
       )
     }
     <meta http-equiv="content-language" content="en" />
-
     <meta name="language" content="English" />
     <link
       rel="canonical"
-      href={`${config.site.baseUrl}/blog/${frontmatter.slug}`}
+      href={`${config.site.baseUrl}/experience/${frontmatter.slug}`}
     />
   </Fragment>
-  <Section class="zag-responsive-text max-w-prose pt-8 font-serif">
-    <div class="blog-content">
+  <Section class="zag-responsive-text max-w-prose pt-8">
+    <div class="project-content">
       <div class="mt-8 mb-16 flex flex-col gap-4">
+        <p class="zag-muted font-mono text-sm">
+          {frontmatter.startMonthYear} – {frontmatter.endMonthYear}
+        </p>
         <h1
-          class="font-display text-3xl leading-normal sm:text-4xl sm:leading-normal"
+          class="font-display has-text-scramble text-3xl leading-tight sm:text-4xl"
         >
           {frontmatter.title}
         </h1>
-        <div
-          class="zag-muted flex flex-wrap items-center gap-x-4 gap-y-2 text-sm"
-        >
-          <span>{articleDate}</span>
+
+        {
+          /* UPDATED: Replaced the date "pill" with a simple <p> tag to match the snippet. */
+        }
+
+        <div class="flex flex-wrap gap-2 text-sm">
           {
-            frontmatter.readTime && (
-              <div class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-4 w-4"
-                >
-                  <>
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </>
-                </svg>
-                <span>{frontmatter.readTime} min read</span>
-              </div>
-            )
+            frontmatter.tags
+              ? frontmatter.tags.map((tag) => (
+                  <span class="-zag-text -zag-bg zag-transition px-2 py-1 font-semibold">
+                    {tag}
+                  </span>
+                ))
+              : null
           }
         </div>
       </div>
       <Prose class="font-serif">
         <slot />
       </Prose>
-      <p class="placeholder-zag-dark-opaque pt-8">~{config.personal.name}</p>
     </div>
   </Section>
 </Layout>

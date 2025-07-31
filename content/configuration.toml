@@ -2,7 +2,7 @@
 # we need to prefix all configuration keys with an underscore.
 
 [_.site]
-baseUrl = "http://sgdp.vercel.app"
+baseUrl = "https://sgdp.vercel.app"
 
 [_.globalMeta]
 title = "Sri Guru Datta Pisupati"
@@ -100,6 +100,41 @@ keywords = [
   "adventure",
   "music",
 ]
+
+[_.experienceMeta]
+title = "Sri Guru Datta Pisupati's Experience"
+description = "A list of my professional experiences"
+longDescription = "A list of my professional experiences"
+cardImage = "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+keywords = [
+  "scientific compute",
+  "linux",
+  "astrophysics",
+  "astrophotography",
+  "guitar",
+  "prog rock",
+  "technology",
+  "geospatial",
+  "artificial intelligence",
+  "machine learning",
+  "progressive rock",
+  "progressive metal",
+  "astronomy",
+  "time series",
+  "performance",
+  "vector databases",
+  "data science",
+  "git",
+  "docker",
+  "kubernetes",
+  "shell",
+  "motorcycle",
+  "f1",
+  "adventure",
+  "music",
+]
+
+
 [_.notFoundMeta]
 title = "Error 404"
 description = "The page you are looking for does not exist. "
@@ -125,8 +160,10 @@ projectsName = "Projects"
 viewAll = "View All"
 noArticles = "No articles found."
 noProjects = "No projects found."
+noExperiences = "No experiences found."
 
 [_.menu]
 home = "/"
 projects = "/projects"
 blog = "/blog"
+experience = "/experience"

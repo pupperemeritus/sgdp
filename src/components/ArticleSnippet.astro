@@ -1,7 +1,6 @@
 ---
-import { processArticleDate } from "../lib/utils";
 import Anchor from "./common/Anchor.astro";
-
+import Gist from "@kotosha/astro-gist";
 export type Props = {
   title: string;
   description: string;
@@ -11,19 +10,72 @@ export type Props = {
 };
 
 const { title, description, url, duration, timestamp } = Astro.props;
+
+const month = timestamp
+  ? timestamp.toLocaleDateString("en-us", { month: "short" }).toUpperCase()
+  : "N/A";
+const day = timestamp
+  ? timestamp.toLocaleDateString("en-us", { day: "numeric" })
+  : "";
 ---
 
-<div class="relative zag-text zag-transition flex flex-col gap-3 mb-8 hover-zag-dotted-grid">
-  <Anchor url={url} class="text-xl">
-    {title}
-  </Anchor>
-  <p class="">
-    {description}
-  </p>
-  <div
-    class="zag-muted zag-transition flex justify-between items-center"
-  >
-    {timestamp ? <p>{processArticleDate(timestamp)}</p> : null}
-    {duration ? <p>{duration}</p> : null}
+<div
+  class="group relative flex gap-x-5 rounded-lg transition-colors hover:bg-[var(--theme-code-bg)] sm:gap-x-8"
+>
+  <div class="flex w-14 flex-col items-center text-center sm:w-16">
+    <div class="font-mono">
+      <div
+        class="zag-muted text-lg font-bold transition-colors group-hover:text-[var(--theme-accent)]"
+      >
+        {month}
+      </div>
+      <div class="text-2xl font-bold text-[var(--theme-heading)]">{day}</div>
+    </div>
+    <div
+      class="mt-2 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 border-[var(--theme-border)] bg-[var(--theme-bg)] transition-colors group-hover:border-[var(--theme-accent)]"
+    >
+      <div
+        class="h-2 w-2 rounded-full bg-[var(--theme-border)] transition-colors group-hover:bg-[var(--theme-accent)]"
+      >
+      </div>
+    </div>
+    <div
+      class="mt-2 w-px flex-1 bg-[var(--theme-border)] group-last:bg-transparent"
+    >
+    </div>
+  </div>
+
+  <div class="flex-1">
+    <Anchor url={url}>
+      <h3
+        class="has-text-scramble text-xl font-bold text-[var(--theme-heading)] transition-colors group-hover:text-[var(--theme-accent)]"
+      >
+        {title}
+      </h3>
+    </Anchor>
+    <p class="zag-text mt-2 text-base">{description}</p>
+    {
+      // UPDATED: Conditional check for `readTime`
+      duration && (
+        <div class="zag-muted mt-3 flex items-center gap-2 text-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span>{duration}</span>
+        </div>
+      )
+    }
   </div>
 </div>

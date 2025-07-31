@@ -2,20 +2,20 @@
 import { getCollection, render } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import { getConfigurationCollection } from "../../lib/utils";
-import Gist from "@kotosha/astro-gist"
-import "../../styles/global.css"
+import Gist from "@kotosha/astro-gist";
+import "../../styles/global.css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   const { data: config } = await getConfigurationCollection();
   return posts.map((article) => ({
     params: { id: article.data.slug },
-    props: { 
+    props: {
       article: {
         ...article,
         data: {
           ...article.data,
-          url: `${config.site.baseUrl}/blog/${article.data.slug}`,
+          url: `/blog/${article.data.slug}`,
         },
       },
     },
@@ -27,5 +27,5 @@ const { Content } = await render(article);
 ---
 
 <BlogLayout frontmatter={article.data}>
-  <Content components={{Gist}}/>
+  <Content components={{ Gist }} />
 </BlogLayout>

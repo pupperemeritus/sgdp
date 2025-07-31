@@ -49,49 +49,56 @@ const { data: config } = await getConfigurationCollection();
       )
     }
     <meta http-equiv="content-language" content="en" />
+
     <meta name="language" content="English" />
     <link
       rel="canonical"
       href={`${config.site.baseUrl}/projects/${frontmatter.slug}`}
     />
   </Fragment>
-  <Section class="pt-8 zag-responsive-text wide-width">
+  <Section class="zag-responsive-text max-w-prose pt-8 font-serif">
     <div class="project-content">
-      <div class="flex flex-col gap-4 mt-8 mb-16">
-        <h1 class="text-3xl sm:text-4xl leading-tight font-display">
-          {frontmatter.title}
-        </h1>
-      <div class="flex flex-wrap text-sm gap-2">
-        {
-          frontmatter.tags
-            ? frontmatter.tags.map((tag) => (
-                <span class="-zag-text -zag-bg zag-transition font-semibold py-1 px-2">
-                  {tag}
-                </span>
-              ))
-            : null
-        }
+      <div class="mt-8 mb-16 flex flex-col gap-4">
+        <div class="flex flex-wrap items-center justify-between gap-y-2">
+          <h1 class="font-display text-3xl leading-tight sm:text-4xl">
+            {frontmatter.title}
+          </h1>
+          <div class="flex shrink-0 gap-4">
+            {
+              frontmatter.githubUrl ? (
+                <Anchor url={frontmatter.githubUrl} class="text-base" external>
+                  GitHub
+                </Anchor>
+              ) : null
+            }
+            {
+              frontmatter.liveDemoUrl ? (
+                <Anchor
+                  url={frontmatter.liveDemoUrl}
+                  class="text-base"
+                  external
+                >
+                  Demo
+                </Anchor>
+              ) : null
+            }
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 text-sm">
+          {
+            frontmatter.tags
+              ? frontmatter.tags.map((tag) => (
+                  <span class="-zag-text -zag-bg zag-transition px-2 py-1 font-semibold">
+                    {tag}
+                  </span>
+                ))
+              : null
+          }
+        </div>
       </div>
-      <div class="flex gap-2 zag-flex-grid">
-        {
-          frontmatter.githubUrl ? (
-            <Anchor url={frontmatter.githubUrl} class="text-base" external>
-              GitHub
-            </Anchor>
-          ) : null
-        }
-        {
-          frontmatter.liveDemoUrl ? (
-            <Anchor url={frontmatter.liveDemoUrl} class="text-base" external>
-              Demo
-            </Anchor>
-          ) : null
-        }
-      </div>
-    </div>
-    <Prose class="font-serif">
-      <slot />
-    </Prose>
+      <Prose class="font-serif">
+        <slot />
+      </Prose>
     </div>
   </Section>
 </Layout>

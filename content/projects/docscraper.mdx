@@ -1,0 +1,54 @@
+---
+title: Docscraper
+slug: docscraper
+description: A tool to scrape documentation and other knowledge bases
+longDescription: A tool to scrape documentation and other knowledge bases
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["cnn", "deep learning", "competition"]
+githubUrl: "https://www.github.com/pupperemeritus/doscraper"
+timestamp: 2025-07-21T17:30:00+05:30
+featured: true
+---
+
+This project is a sophisticated command-line tool engineered specifically for creating high-fidelity, offline archives of documentation websites. It moves beyond basic web scraping by integrating intelligent features that prioritize the quality, structure, and relevance of the final output.
+
+---
+
+### Key Differentiators: Beyond a Simple Scraper
+
+What truly sets this project apart is its focus on creating a clean and navigable knowledge base, not just a folder of downloaded files.
+
+#### 1. Intelligent Hierarchical Structuring
+
+Instead of dumping all scraped files into a single directory, the scraper can automatically organize content into a nested directory structure that mirrors the website's URL paths. This creates an intuitive, file-system-based navigation experience that makes finding information effortless.
+
+- **Benefits**:
+  - Produces a natural, hierarchical table of contents.
+  - Organizes output in a nested tree structure for easy Browse.
+  - Maintains relationships between related pages.
+
+#### 2. Automated Content Quality Control
+
+This is the core unique feature. The scraper employs a configurable quality analysis engine to ensure that only valuable content is saved. It actively filters out digital noise, resulting in a cleaner and more useful archive.
+
+- **Filtering Mechanisms**:
+  - Enforces a minimum word count to discard sparse or empty pages.
+  - Skips pages that lack a title or substantive content.
+  - Identifies and excludes common non-content pages like "404 Not Found" or maintenance notices using blacklisted patterns.
+  - Can filter content by detected language, such as "en" for English.
+
+#### 3. Efficient and Redundancy-Free Crawling
+
+To maximize speed and minimize storage, the tool features a robust duplicate link detection system. It intelligently normalizes URLs—by ignoring case, trailing slashes, or URL fragments—to ensure it never processes or saves the same page twice. This results in faster scraping and a cleaner, duplication-free output.
+
+---
+
+### Developer-Centric Tooling
+
+The project is built with developers and power users in mind, offering a suite of tools for control and transparency during the scraping process.
+
+- **Dry Run Mode**: You can perform a full simulation to test your configuration and see which URLs would be scraped without actually sending any requests or writing any files.
+- **Performance Profiling**: Enables tracking of memory usage, request timing, and errors, with an option to save a detailed performance report.
+- **Configuration Validation**: A built-in checker validates your `config.yaml` file to prevent errors before the scraping process begins.
+
+In summary, the Go Documentation Scraper is a specialized solution designed to store online documentation into a well-organized, and high-quality offline archive.

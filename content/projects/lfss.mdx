@@ -10,11 +10,15 @@ timestamp: 2025-07-21T17:30:00+05:30
 featured: true
 ---
 
-EE-ONE-D is a text analysis and search system designed to enable comprehensive entity-oriented natural language exploration. It is named after the gadget used by the attacking operator Lion in Rainbow Six Siege, chosen for its ability to find enemy operators in motion. By integrating multiple complementary search approaches - typographical similarity, semantic meaning, and fuzzy matching - the system delivers robust search capabilities that extend beyond traditional keyword matching.
+EE-ONE-D is a text analysis and search system designed to enable comprehensive entity-oriented natural language exploration. It is named after the gadget used by the attacking operator Lion in Rainbow Six Siege, chosen for its ability to find enemy operators in motion. By integrating multiple complementary search approaches - typographical similarity, semantic meaning, and fuzzy matching - the system delivers robust search capabilities that extend beyond traditional keyword matching
+
+---
 
 ## Technical Implementation
 
 The project consists of four primary interconnected modules:
+
+---
 
 ### 1. Typographical Module
 
@@ -23,11 +27,15 @@ The project consists of four primary interconnected modules:
 - Utilizes BERT tokenization and embedding techniques to calculate similarity metrics between the query and potential matches
 - Works using the edit distance, basic neighbouring words are found which are then sorted by semantic similarity by comparing the cosine similarity between the embeddings of all found words
 
+---
+
 ### 2. Semantic Module
 
 - Leverages transformer-based language models to understand semantic relationships between words and phrases
 - Integrates with a Milvus vector database for efficient similarity search across large text corpora
 - Encodes text using the sentence-transformers framework to generate meaningful vector representations
+
+---
 
 ### 3. Fuzzy Search Module
 
@@ -36,11 +44,15 @@ The project consists of four primary interconnected modules:
 - Includes configurable distance thresholds and contextual result presentation
 - Optimized for performance with early filtering based on string length properties
 
+---
+
 ### 4. Attention Module
 
 - Analyzes the relative importance of words within the query
 - It returns top n important tokens in the query
 - This is an additional module that isn’t part of the basic lexical fuzzy semantic search pipeline, we made it in order to perform a weighted search for input text with multiple words
+
+---
 
 The architecture emphasizes modularity with a pipeline-based design pattern that allows components to be used independently or chained together for more powerful search capabilities. We used Milvus for vector storage and retrieval, with custom embedding functions to translate natural language into high-dimensional vector spaces.
 

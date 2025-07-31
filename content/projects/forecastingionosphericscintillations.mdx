@@ -10,7 +10,7 @@ timestamp: 2025-07-21T17:30:00+05:30
 featured: true
 ---
 
-This project addresses the challenge of predicting signal disturbances affecting satellite communications over the Indian subcontinent. I researched and implemented LSTM, X-LSTM in Pytorch+Pytorch Lightning and Graphcast in Jax+Flax on a very limited dataset.
+This project addresses the challenge of predicting signal disturbances affecting satellite communications over the Indian subcontinent. I researched and implemented LSTM, X-LSTM in Pytorch+Pytorch Lightning and Graphcast in Jax+Flax.
 
 The data was obtained by my college using PolaRx5 GNSS receiver which was funded through a DST grant.
 
@@ -25,7 +25,7 @@ The project consists of three main components:
 
 All models were trained with MLFlow tracking for experiment monitoring, with specialized preprocessing pipelines to handle the geospatial and temporal aspects of ionospheric data. The system caches intermediate preprocessing results to improve efficiency given the limited dataset size.
 
-The architecture emphasizes modularity, with separate components for data loading, visualization, and model training that can be extended or modified independently. Despite dataset limitations, the models demonstrate promising capabilities for short-term scintillation forecasting.
+The architecture emphasizes modularity, with separate components for data loading, visualization, and model training that can be extended or modified independently. The models demonstrate promising capabilities for short-term scintillation forecasting.
 
 The major bottleneck in model performance was that I only had data from one station, therefore making a horrible grid of points.
 

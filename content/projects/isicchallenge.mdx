@@ -1,0 +1,67 @@
+---
+title: LesionNet
+slug: isic
+description: A deep learning model made for image classification
+longDescription: My submission for the model
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["cnn", "deep learning", "kaggle competition", "medical AI"]
+githubUrl: "https://www.kaggle.com/code/pupperemeritus/competition-draft"
+timestamp: 2025-07-21T17:30:00+05:30
+featured: true
+---
+
+# **LesionNet: My Submission for the ISIC 2024 Challenge**
+
+For the International Skin Imaging Collaboration (ISIC) 2024 Challenge, I developed **LesionNet**, a custom deep learning model for skin cancer classification. The goal of the challenge is to improve the automatic detection of melanoma, and my approach was to build a system that thinks a bit more like a doctor. A clinician doesn't just look at a lesion; they also consider the patient's history and other clinical data. LesionNet is designed to do the same, combining visual analysis from images with insights from tabular metadata.
+
+---
+
+## **My Approach: A Hybrid Architecture**
+
+I decided against using a standard, off-the-shelf model. Instead, I built LesionNet from the ground up to create a powerful and specialized tool. It features two main branches that work in parallel.
+
+### **The Vision Branch: A Custom CNN Powerhouse**
+
+For analyzing the lesion images, I constructed a unique Convolutional Neural Network (CNN) by hand-picking some of the most effective concepts from modern deep learning:
+
+- I started with efficient **Inverted Residual Blocks**, like those in MobileNets, to build a strong foundation.
+- To ensure features and gradients flowed smoothly through the deep network, I incorporated a **Dense Block**, a core idea from DenseNet.
+- Because lesions can have important features at different scales, I added two **Inception Blocks** (inspired by GoogLeNet) to help the model see both fine details and the bigger picture simultaneously.
+- Finally, to help the model focus on the most critical parts of the lesion, I scattered several custom **Attention Blocks** throughout the network.
+
+The goal was to create a network that could build a really rich, nuanced understanding of the visual information in each image.
+
+### **The Metadata Branch: Making Sense of the Numbers**
+
+The second branch is a dedicated Multi-Layer Perceptron (MLP) that processes the 41 clinical features associated with each image. I designed a deep stack of dense layers to extract meaningful patterns from this tabular data.
+
+### **Bringing It All Together**
+
+The magic happens at the end. The vision branch outputs a 256-dimensional vector summarizing the image, and the metadata branch outputs its own 256-dimensional vector summarizing the clinical data. I then **concatenate** these two vectors. This combined representation gives the final classifier a holistic view of the case before it makes its prediction.
+
+---
+
+## **Data, Training, and Evaluation**
+
+A good model needs good data, so I built a robust pipeline to handle the inputs. This involved cleaning the metadata by filling in missing values, converting text categories to numbers, and scaling all features so they're on a level playing field. To save time during experiments, I even built a caching system for the preprocessed data.
+
+The model was evaluated using the PartialAUROC metric
+
+---
+
+## **Challenges Faced and Lessons Learned**
+
+This project was a fantastic learning experience, but it came with its share of challenges.
+
+1. **Taming Architectural Complexity**: Designing LesionNet felt like assembling a complex puzzle. Getting so many different types of blocks—Inverted Residuals, Dense Blocks, Inception modules—to work together harmoniously took a lot of trial, error, and fine-tuning.
+2. **Balancing the Two Branches**: A key challenge was ensuring the model learned to trust both the image and the metadata. I had to carefully design the network so that one branch didn't overpower the other, allowing for a true fusion of information.
+3. **Implementing the Custom Metric**: Writing the `PartialAUROC` metric from scratch was tough. It required a deep dive into how ROC curves are calculated and then carefully modifying the logic to focus only on that high-sensitivity region. It was a difficult but rewarding part of the project.
+
+---
+
+## **Future Work**
+
+In the future, I'd like to explore more advanced image augmentation techniques to make the model even more robust. I'm also interested in experimenting with different ways to fuse the two data streams, potentially at earlier stages in the network.
+I believe it can be made lighter as well.
+
+[Link to the code](https://www.kaggle.com/code/pupperemeritus/competition-draft)

@@ -5,12 +5,13 @@ export type Props = {
   title: string;
   description: string;
   url: string;
-  githubUrl?: string;
-  liveUrl?: string;
+  startMonthYear: string;
+  endMonthYear: string;
   tags: string[];
 };
 
-const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
+const { title, description, url, startMonthYear, endMonthYear, tags } =
+  Astro.props;
 ---
 
 <div
@@ -32,32 +33,16 @@ const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
   </div>
 
   <div class="flex-1">
-    <div class="flex flex-wrap items-center justify-between gap-2">
-      <Anchor url={url}>
-        <h3
-          class="has-text-scramble text-xl font-bold text-[var(--theme-heading)] transition-colors group-hover:text-[var(--theme-accent)]"
-        >
-          {title}
-        </h3>
-      </Anchor>
-      <div class="flex shrink-0 gap-4">
-        {
-          githubUrl && (
-            <Anchor url={githubUrl} class="text-sm" external>
-              GitHub
-            </Anchor>
-          )
-        }
-        {
-          // UPDATED: Conditional check for `liveDemoUrl`
-          liveUrl && (
-            <Anchor url={liveUrl} class="text-sm" external>
-              Demo
-            </Anchor>
-          )
-        }
-      </div>
-    </div>
+    <p class="zag-muted font-mono text-sm">
+      {startMonthYear} – {endMonthYear}
+    </p>
+    <Anchor url={url}>
+      <h3
+        class="has-text-scramble text-xl font-bold text-[var(--theme-heading)] transition-colors group-hover:text-[var(--theme-accent)]"
+      >
+        {title}
+      </h3>
+    </Anchor>
     <p class="zag-text mt-2 text-base">{description}</p>
     <div class="mt-3 flex flex-wrap gap-2">
       {

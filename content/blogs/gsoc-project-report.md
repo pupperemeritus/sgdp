@@ -7,7 +7,7 @@ cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jp
 tags: ["code", "python", "astropy", "numpy", "stingray", "open source"]
 readTime: 15
 featured: True
-timestamp: 2025-07-21T02:39:03+05:30
+timestamp: 2023-09-24T02:59:03+05:30
 ---
 
 # Astronomy Using Unevenly Sampled Data @ StingraySoftware

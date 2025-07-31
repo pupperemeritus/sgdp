@@ -1,0 +1,55 @@
+---
+title: A custom-built CNN to classify PET data
+slug: pet
+description: A deep learning model made for image classification
+longDescription: My submission for the model
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["cnn", "deep learning", "medical AI"]
+githubUrl: "https://www.kaggle.com/code/pupperemeritus/competition-draft"
+timestamp: 2025-07-21T17:30:00+05:30
+featured: true
+---
+
+# **GuruNet: A Custom CNN for Cognitive Health Classification**
+
+This project introduces **GuruNet**, a custom-built Convolutional Neural Network (CNN) I designed to classify Positron Emission Tomography (PET) scans into five distinct categories of cognitive health: Alzheimer's Disease (AD), Cognitively Normal (CN), Late Mild Cognitive Impairment (LMCI), Early Mild Cognitive Impairment (EMCI), and Mild Cognitive Impairment (MCI).
+
+The main goal was to create a model that was not only highly **accurate** but also incredibly **efficient**. I wanted to see if I could outperform standard, well-known architectures like ResNet50 and InceptionV3 while keeping the model small and fast.
+
+---
+
+## **My Architectural Philosophy: The Best of All Worlds**
+
+Instead of relying on a single design, I built GuruNet by combining some of the most powerful and innovative ideas from modern deep learning. Think of it as a "greatest hits" album of CNN components, all working together in a unique architecture.
+
+- **Efficient Foundations**: The backbone of the network is built on **Inverted Residual Blocks** (popularized by MobileNet), which are great for deep feature extraction without a massive computational cost. These blocks also feature a **Squeeze-and-Excitation (SE)** layer to help the model focus on the most important channels.
+- **Feature Reuse**: I incorporated **Dense Blocks** from DenseNet. This allows every layer to connect directly with every other layer, which is fantastic for gradient flow and encourages the model to reuse features, making it more parameter-efficient.
+- **Seeing at Multiple Scales**: To ensure the model could capture both fine details and broader patterns in the PET scans, I included both a custom **Multi-Scale Block** and a depthwise-separable **Inception Block**. These allow the network to process the image with different receptive fields at the same time.
+- **Intelligent Focus**: Sprinkled throughout the network are several custom **Attention Blocks** and a **Gated Residual Block**. These act as smart filters, helping the model learn to pay more attention to the most salient, information-rich regions of an image while allowing for better control over the flow of information.
+
+The final classification is handled by a deep, multi-layer classification head with dropout for regularization.
+
+---
+
+## **The Data and Training Pipeline**
+
+The model was trained on a dataset of PET scans organized by class. My `PETDataModule`, built with PyTorch Lightning, handles all the heavy lifting:
+
+1. **Preprocessing**: Each image is resized to $256 \times 256$ and normalized using standard ImageNet statistics.
+2. **Splitting**: The dataset is reproducibly split into training (70%), validation (15%), and testing (15%) sets.
+3. **Training**: The training process is highly optimized. I used the **Adam optimizer** with a learning rate scheduler that reduces the rate when validation loss plateaus. To speed things up, I used **mixed-precision training** and gradient accumulation. Callbacks for **early stopping** and saving the **best model checkpoints** ensured an efficient and effective training loop.
+
+---
+
+## **The Results: Small, Mighty, and Accurate**
+
+The results were incredibly rewarding. As shown in the performance table, **GuruNet** stands out from the competition.
+
+| Model           | Test Accuracy | Total Params (M) | Model Size (MB) |
+| :-------------- | :------------ | :--------------- | :-------------- |
+| **GuruNet**     | _**98.40%**_  | _**6.1**_        | _**24.5**_      |
+| **ResNet50**    | **97.34%**    | **24.7**         | **98.9**        |
+| **InceptionV3** | **96.80%**    | **26.3**         | **105.3**       |
+| **DenseNet121** | **97.93%**    | **7.6**          | **30.6**        |
+
+GuruNet not only achieved the **highest test accuracy (98.4%)** but did so with a fraction of the parameters. It's roughly **4x smaller** than ResNet50 and DenseNet121, making it faster to train and much more efficient for inference. This project demonstrates that by carefully combining modern architectural concepts, it's possible to build custom models that outperform larger, more established networks on specialized tasks.

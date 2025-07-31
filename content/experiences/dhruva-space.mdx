@@ -1,0 +1,27 @@
+---
+title: Dhruva Space Private Limited
+slug: dspl
+description: Intern - Software Engineer
+longDescription: Intern - Software Engineer
+startMonthYear: January 2025
+endMonthYear: April 2025
+cardImage: "https://staging-jubilee.flickr.com/65535/49707414291_871a8a081a_q.jpg"
+tags: ["satellite", "dhruva", "space", "swe", "AI"]
+timestamp: 2025-04-07T17:30:00+05:30
+featured: true
+---
+
+I engineered an orbital mechanics system featuring state vector propagation, initial orbit determination, and conjunction risk assessment via Streamlit interfaces.
+I used rq (python-rq) to run these complicated jobs in the background to add separation between frontend and backend, and allow parallel job execution.
+
+I optimized satellite conjunction analysis algorithm by rewriting the above Python algorithm in Java using multithreading, achieving >12x speedup (3+ min $$\rightarrow$$ 16s) and reducing memory usage by $$>50\%$$.
+I benchmarked it across both a desktop and a Raspberry Pi, then projected the performance onto other hardware based on known performance comparisons.
+
+Based on the projections, I came up with comparison for the most value for money hardware combination that would be enough to run the calculations in target time.
+I designed a draft data center spec based around this hardware and further requirements given by the potential client.
+
+I implemented AI-driven object and change detection on satellite imagery using efficient VLM fine-tuning techniques (LoRA, PEFT) like Qwen, Florence and CountGD (GroundingDino).
+I developed a QGIS plugin and web UI leveraging the above AI models for enhanced satellite imagery analysis.
+
+I built "Tiles to TIFF Enhanced", a robust Typer CLI tool for asynchronous Mapbox tile acquisition/processing with a circuit breaker mechanism to minimiize extra requests.
+It provides detailed statistics and logs regarding the progress of the download and merging process.

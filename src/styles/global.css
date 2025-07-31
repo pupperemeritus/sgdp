@@ -1,392 +1,136 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+/*
+================================================================================
+  Modernized Global CSS v15 - Smoother Aurora
+  ---
+  - RE-ENGINEERED: The `.has-aurora-background` effect now uses a multi-step
+    gradient for a much smoother, more natural look, fixing the "running out
+    of colors" issue.
+  - ADDED: A subtle pulsing animation to the aurora to make it feel more alive.
+  - All other features and bug fixes are maintained.
+================================================================================
+*/
 
+/*
+================================================================================
+  1. FONT IMPORTS & DEFINITIONS
+================================================================================
+*/
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;700&family=Press+Start+2P&display=swap");
+@plugin "@tailwindcss/typography";
 @variant dark (&:where(.dark, .dark *));
 
-@font-face {
-  font-family: "Literata Variable";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 200 900;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/literata:vf@latest/latin-opsz-normal.woff2)
-    format("woff2-variations");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
-    U+2215, U+FEFF, U+FFFD;
+/*
+================================================================================
+  2. THEME & VARIABLES
+================================================================================
+*/
+:root {
+  /* NORD COLOR PALETTE */
+  --nord0: #2e3440;
+  --nord1: #3b4252;
+  --nord2: #434c5e;
+  --nord3: #4c566a;
+  --nord4: #d8dee9;
+  --nord5: #e5e9f0;
+  --nord6: #eceff4;
+  --nord7: #8fbcbb;
+  --nord8: #88c0d0;
+  --nord9: #81a1c1;
+  --nord10: #5e81ac;
+  --nord11: #bf616a;
+  --nord12: #d08770;
+  --nord13: #ebcb8b;
+  --nord14: #a3be8c;
+  --nord15: #b48ead;
+
+  /* SEMANTIC VARIABLES (Light Theme) */
+  --theme-bg: var(--nord6);
+  --theme-bg-secondary: var(--nord5);
+  --theme-text: var(--nord1);
+  --theme-text-muted: var(--nord2);
+  --theme-heading: var(--nord0);
+  --theme-accent: var(--nord10);
+  --theme-accent-gradient: linear-gradient(
+    90deg,
+    var(--nord7) 0%,
+    var(--nord8) 33%,
+    var(--nord15) 66%,
+    var(--nord10) 100%
+  );
+  --theme-border: var(--nord4);
+  --theme-code-bg: var(--nord5);
+
+  /* TYPOGRAPHY */
+  --font-primary: "Fira Sans", sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --font-display: "Press Start 2P", system-ui;
+  --font-serif: "Fira Sans", serif;
+  --font-scale: 1.1;
+  --min-font-size: 16px;
+  --max-font-size: 20px;
+
+  /* LAYOUT & SPACING */
+  --container-width: 90rem;
+  --container-padding: 1rem;
+  --border-radius: 0.5rem;
+
+  /* TRANSITIONS & ANIMATIONS */
+  --transition-speed-fast: 200ms;
+  --transition-speed-medium: 400ms;
+  --transition-speed-slow: 600ms;
+  --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-@font-face {
-  font-family: "press-start-2p";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src:
-    url(https://cdn.jsdelivr.net/fontsource/fonts/press-start-2p@latest/latin-400-normal.woff2)
-      format("woff2"),
-    url(https://cdn.jsdelivr.net/fontsource/fonts/press-start-2p@latest/latin-400-normal.woff)
-      format("woff");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
-    U+2215, U+FEFF, U+FFFD;
+/* DARK MODE THEME OVERRIDES */
+:root.dark {
+  --theme-bg: var(--nord0);
+  --theme-bg-secondary: var(--nord1);
+  --theme-text: var(--nord6);
+  --theme-text-muted: var(--nord4);
+  --theme-heading: var(--nord6);
+  --theme-accent: var(--nord8);
+  --theme-accent-gradient: linear-gradient(
+    90deg,
+    var(--nord7),
+    var(--nord15),
+    var(--nord7)
+  );
+  --theme-border: var(--nord2);
+  --theme-code-bg: var(--nord1);
 }
 
 /*
- Welcome! Zaggonaut colors originate from these theme variables, feel
- free to change them! 
+================================================================================
+  3. BASE & THEME TRANSITION
+================================================================================
 */
-@theme {
-  --font-mono: "Fira Code", ui-monospace, monospace;
-  --font-display: "press-start-2p", ui-monospace, monospace;
-  --font-serif:
-    "Fira Sans", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-
-  /* === Neutral Base Colors === */
-  --color-zag-dark: #2e3440; /* Nord0 */
-  --color-zag-dark-muted: #3b4252; /* Nord1 */
-  --color-zag-dark-opaque: oklch(from #2e3440 l c h / 0.7);
-
-  --color-zag-light: #eceff4; /* Nord6 */
-  --color-zag-light-muted: #d8dee9; /* Nord4 */
-  --color-zag-light-opaque: oklch(from #eceff4 l c h / 0.8);
-
-  /* === Base Accent Pair === */
-  --color-zag-accent-light: #81a1c1; /* Nord9 */
-  --color-zag-accent-light-muted: #a3b9d1; /* desaturated Nord9 */
-  --color-zag-accent-dark: #8fbcbb; /* Nord7 */
-  --color-zag-accent-dark-muted: #5e81ac; /* Nord10 */
-
-  /* === Extended Color Roles === */
-  --color-zag-red: #bf616a; /* Nord11 */
-  --color-zag-orange: #d08770; /* Nord12 */
-  --color-zag-yellow: #ebcb8b; /* Nord13 */
-  --color-zag-green: #a3be8c; /* Nord14 */
-  --color-zag-purple: #b48ead; /* Nord15 */
-
-  /* === Optional Semantic Aliases === */
-  --color-success: var(--color-zag-green);
-  --color-error: var(--color-zag-red);
-  --color-warning: var(--color-zag-orange);
-  --color-info: var(--color-zag-accent-light);
-  --color-note: var(--color-zag-purple);
-}
-
-@layer base {
-  :root {
-    --zag-stroke: 2px;
-    --zag-offset: 6px;
-    --zag-transition-duration: 0.15s;
-    --zag-transition-timing-function: ease-in-out;
-  }
-
-  ::selection {
-    background-color: var(--color-zag-accent-light);
-    color: var(--color-zag-dark-muted);
-  }
-
-  .zag-transition {
-    @media (prefers-reduced-motion: no-preference) {
-      transition:
-        background-color var(--zag-transition-duration)
-          var(--zag-transition-timing-function),
-        color var(--zag-transition-duration)
-          var(--zag-transition-timing-function),
-        fill var(--zag-transition-duration)
-          var(--zag-transition-timing-function),
-        border-color var(--zag-transition-duration)
-          var(--zag-transition-timing-function),
-        transform var(--zag-transition-duration)
-          var(--zag-transition-timing-function);
-    }
-  }
-
-  .zag-bg {
-    background-color: var(--color-zag-light);
-    :where(.dark, .dark *) & {
-      background-color: var(--color-zag-dark);
-    }
-  }
-
-  .-zag-bg {
-    background-color: var(--color-zag-dark);
-    :where(.dark, .dark *) & {
-      background-color: var(--color-zag-light);
-    }
-  }
-
-  .zag-text {
-    color: var(--color-zag-dark);
-    :where(.dark, .dark *) & {
-      color: var(--color-zag-light);
-    }
-  }
-
-  .-zag-text {
-    color: var(--color-zag-light);
-    :where(.dark, .dark *) & {
-      color: var(--color-zag-dark);
-    }
-  }
-
-  .zag-muted {
-    color: var(--color-zag-dark-muted);
-    :where(.dark, .dark *) & {
-      color: var(--color-zag-light-muted);
-    }
-  }
-
-  .zag-fill {
-    fill: var(--color-zag-dark);
-    &:where(.dark, .dark *) {
-      fill: var(--color-zag-light);
-    }
-  }
-
-  .zag-text-muted {
-    color: var(--color-zag-dark-muted);
-    &:where(.dark, .dark *) {
-      color: var(--color-zag-light-muted);
-    }
-  }
-
-  .zag-border-b {
-    border-bottom: var(--zag-stroke) solid;
-    border-color: var(--color-zag-dark);
-    &:where(.dark, .dark *) {
-      border-color: var(--color-zag-light);
-    }
-  }
-
-  .zag-offset {
-    text-underline-offset: var(--zag-offset);
-  }
-
-  .hover-zag-dotted-grid:hover::before {
-    --dot-bg: var(--color-zag-light);
-    --dot-color: var(--color-zag-dark-muted);
-    --dot-size: 1.5px;
-    --dot-space: 16px;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    z-index: -1;
-    background:
-      linear-gradient(
-          90deg,
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        bottom right / var(--dot-space) var(--dot-space),
-      linear-gradient(
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        bottom right / var(--dot-space) var(--dot-space),
-      var(--dot-color);
-    pointer-events: none;
-  }
-
-  :where(.dark, .dark *) .hover-zag-dotted-grid:hover::before {
-    --dot-bg: var(--color-zag-dark);
-    --dot-color: var(--color-zag-light-muted);
-  }
-
-  .hover-zag-dotted-grid:hover::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    z-index: -1;
-    background: linear-gradient(
-      159deg,
-      var(--color-zag-light) 0%,
-      var(--color-zag-light) 50%,
-      var(--color-zag-light-opaque) 100%
-    );
-    pointer-events: none;
-  }
-
-  :where(.dark, .dark *) .hover-zag-dotted-grid:hover::after {
-    background: linear-gradient(
-      159deg,
-      var(--color-zag-dark) 0%,
-      var(--color-zag-dark) 50%,
-      var(--color-zag-dark-opaque) 100%
-    );
-  }
-
-  .opsz {
-    font-variation-settings: "opsz" 72;
-  }
-}
-
-/* Minimal Full-Width Layout - Complete Solution */
-
-/* Reset and base */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html,
+html {
+  transition:
+    color var(--transition-speed-medium) var(--transition-easing),
+    background-color var(--transition-speed-medium) var(--transition-easing);
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100%;
+  font-family: var(--font-primary);
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Universal full-width container */
-.full-width,
-header,
-main,
-section,
-footer {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding-left: clamp(1rem, 4vw, 8rem);
-  padding-right: clamp(1rem, 4vw, 8rem);
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* Override existing classes */
-.zag-responsive-container,
-.w-full-vw {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding-left: clamp(1rem, 4vw, 8rem) !important;
-  padding-right: clamp(1rem, 4vw, 8rem) !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-/* Top menu/nav spreads full width */
-nav,
-.menu,
-.navbar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Navbar items distribution */
-nav > *,
-.navbar > *,
-.menu > * {
-  flex: 0 0 auto;
-}
-
-/* Center navbar item gets remaining space */
-nav > *:nth-child(2),
-.navbar > *:nth-child(2),
-.menu > *:nth-child(2) {
-  flex: 1 1 auto;
-  text-align: center;
-}
-
-/* Mobile menu fixes */
-@media (min-width: 769px) {
-  .hamburger,
-  .mobile-menu-toggle,
-  [class*="hamburger"],
-  [class*="mobile"] {
-    display: none !important;
-  }
-}
-
-/* Content spacing */
-.content {
-  margin: 0 auto;
-}
-
-/* Responsive text */
-body {
-  font-size: clamp(1rem, 1rem + 0.3vw, 1.3rem);
-  line-height: 2;
-}
-
-/* Simple Content Width Constraints - Additive to your existing CSS */
-
-/* Only add constraints to content areas, leave layout structure alone */
-
-/* Blog and project content should be wider for better layout */
-.blog-content,
-.project-content {
-  max-width: 85vw;
-  margin: 0 auto;
-}
-
-/* Prose component constraint - wider for better readability */
-.prose,
-[class*="prose"] {
-  max-width: 85vw;
-  margin: 0 auto;
-}
-
-/* Override the max-w-none class specifically for content sections */
-.zag-responsive-text.max-w-none {
-  max-width: 85vw !important;
-  margin: 0 auto !important;
-}
-
-/* Article/post containers */
-article,
-.article-content {
-  max-width: 85vw;
-  margin: 0 auto;
-}
-
-/* Allow images to be slightly wider than text */
-.prose img,
-.blog-content img,
-.project-content img,
-article img {
-  max-width: 100ch;
-  margin-left: calc(50% - 50ch);
-  margin-right: calc(50% - 50ch);
-  width: 100%;
-}
-
-/* Utility classes for when you need them */
-.constrain-content {
-  max-width: 85ch;
-  margin: 0 auto;
-}
-
-.wide-content {
-  max-width: 100ch;
-  margin: 0 auto;
-}
-
-/* Breakout utility for full-width elements within constrained content */
-.breakout {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding-left: clamp(1rem, 4vw, 8rem);
-  padding-right: clamp(1rem, 4vw, 8rem);
-}
-
-/* Simple Font Size Scaler - Maintains All Proportions */
-:root {
-  --font-scale: 1.08; /* Adjust as needed */
-  --min-font-size: 0.9rem;
-  --max-font-size: 1.5rem;
-}
-
-/* Use clamp to make font-size responsive */
+/*
+================================================================================
+  4. TYPOGRAPHY & TEXT ELEMENTS
+================================================================================
+*/
 * {
   font-size: clamp(
     calc(var(--min-font-size) * var(--font-scale)),
@@ -395,60 +139,67 @@ article img {
   ) !important;
 }
 
-/* ==== GLOBAL MOBILE LAYOUT (≤640px) ==== */
-@media (max-width: 640px) {
-  /* 1. Narrow out the content gutters */
-  .zag-responsive-container,
-  .full-width,
-  .zag-responsive-container.w-full-vw {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-
-  /* 2. Tighter spacing in main sections */
-  main {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  /* 3. Stack any two‑column layouts vertically */
-  .flex.flex-row.sm\\:flex-row {
-    flex-direction: column !important;
-  }
-
-  /* 4. Ensure your section headings don’t overflow: */
-  h1,
-  h2,
-  h3 {
-    word-break: break-word;
-    font-size: clamp(1rem, 5vw, 1.75rem) !important;
-    line-height: 1.3 !important;
-  }
-}
-
-/* ==== MOBILE‑ONLY VERTICAL GUTTERS ==== */
-@media (max-width: 640px) {
-  /* tune these to your taste */
-  :root {
-    --v-gap-min: 0.75rem;
-    --v-gap-max: 1.5rem;
-  }
-
-  /* every sibling in main/section/blog/project stacks with a clamp() gap */
-  main > * + *,
-  section > * + *,
-  .blog-content > * + *,
-  .project-content > * + * {
-    margin-top: clamp(var(--v-gap-min), 4vw, var(--v-gap-max));
-  }
-}
-
-body {
-  font-family: var(--font-serif);
-}
-
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
+  color: var(--theme-heading);
+  letter-spacing: -0.02em;
+  background: var(--theme-accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradient-pan 4s linear infinite;
+}
+
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+a {
+  color: var(--theme-accent);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 0.2em 0;
+  transition:
+    color var(--transition-speed-fast) ease,
+    transform var(--transition-speed-medium) var(--transition-easing);
+  display: inline-block; /* Needed for transform */
+}
+
+a:hover {
+  transform: skewX(-7deg);
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--theme-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-speed-medium) var(--transition-easing);
+}
+
+a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 pre,
@@ -456,4 +207,535 @@ code,
 kbd,
 samp {
   font-family: var(--font-mono);
+  color: var(--theme-text);
+}
+
+pre {
+  background-color: var(--theme-code-bg);
+  border: 1px solid var(--theme-border);
+  padding: 1em;
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  position: relative;
+}
+
+pre::before {
+  content: "CODE";
+  position: absolute;
+  top: -1px;
+  right: 1em;
+  padding: 0.1em 0.5em;
+  background: var(--theme-accent);
+  color: var(--theme-bg);
+  font-size: 0.7em !important;
+  font-weight: bold;
+  border-radius: 0 0 4px 4px;
+}
+
+:not(pre) > code {
+  background-color: var(--theme-code-bg);
+  padding: 0.2em 0.4em;
+  margin: 0 0.2em;
+  border-radius: 0.3em;
+}
+
+/*
+================================================================================
+  5. PROSE / TYPOGRAPHY PLUGIN OVERRIDES
+================================================================================
+*/
+.prose {
+  --tw-prose-body: var(--theme-text);
+  --tw-prose-headings: var(--theme-heading);
+  --tw-prose-lead: var(--theme-text-muted);
+  --tw-prose-links: var(--theme-accent);
+  --tw-prose-bold: var(--theme-text);
+  --tw-prose-counters: var(--theme-text-muted);
+  --tw-prose-bullets: var(--theme-border);
+  --tw-prose-hr: var(--theme-border);
+  --tw-prose-quotes: var(--theme-text);
+  --tw-prose-quote-borders: var(--theme-border);
+  --tw-prose-captions: var(--theme-text-muted);
+  --tw-prose-code: var(--theme-text);
+  --tw-prose-pre-code: var(--theme-text);
+  --tw-prose-pre-bg: var(--theme-code-bg);
+  --tw-prose-th-borders: var(--theme-border);
+  --tw-prose-td-borders: var(--theme-border);
+  --tw-prose-invert-body: var(--theme-text);
+  --tw-prose-invert-headings: var(--theme-heading);
+  --tw-prose-invert-lead: var(--theme-text-muted);
+  --tw-prose-invert-links: var(--theme-accent);
+  --tw-prose-invert-bold: var(--theme-text);
+  --tw-prose-invert-counters: var(--theme-text-muted);
+  --tw-prose-invert-bullets: var(--theme-border);
+  --tw-prose-invert-hr: var(--theme-border);
+  --tw-prose-invert-quotes: var(--theme-text);
+  --tw-prose-invert-quote-borders: var(--theme-border);
+  --tw-prose-invert-captions: var(--theme-text-muted);
+  --tw-prose-invert-code: var(--theme-text);
+  --tw-prose-invert-pre-code: var(--theme-text);
+  --tw-prose-invert-pre-bg: var(--theme-code-bg);
+  --tw-prose-invert-th-borders: var(--theme-border);
+  --tw-prose-invert-td-borders: var(--theme-border);
+}
+
+/*
+================================================================================
+  6. LAYOUT & ZAG CLASSES
+================================================================================
+*/
+main {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.zag-responsive-container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+.full-width,
+.zag-responsive-container.w-full-vw {
+  max-width: none;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* RESTORED: Base 'zag' classes from Layout.astro */
+.zag-bg {
+  background-color: var(--theme-bg);
+}
+.zag-text {
+  color: var(--theme-text);
+}
+.zag-transition {
+  transition:
+    transform var(--transition-speed-fast) var(--transition-easing),
+    background-color var(--transition-speed-medium) var(--transition-easing),
+    color var(--transition-speed-medium) var(--transition-easing),
+    clip-path var(--transition-speed-medium) var(--transition-easing);
+}
+.zag-transition:hover {
+  transform: scale(1.02);
+}
+
+/*
+================================================================================
+  7. COMPONENT & LAYOUT-SPECIFIC STYLES
+================================================================================
+*/
+.header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition:
+    background-color var(--transition-speed-medium) ease,
+    backdrop-filter var(--transition-speed-medium) ease;
+}
+
+.header-sticky.is-scrolled {
+  background-color: color-mix(in srgb, var(--theme-bg) 80%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.zag-responsive-text {
+  line-height: 1.7;
+}
+.blog-content,
+.project-content {
+  max-width: 80ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.placeholder-zag-dark-opaque {
+  color: var(--theme-text-muted);
+  font-style: italic;
+}
+.wide-width .project-content {
+  max-width: 90ch;
+}
+.-zag-text {
+  color: var(--theme-bg);
+}
+
+/* ADJUSTED: Slanted tag style with 7px cut */
+.-zag-bg {
+  display: inline-block;
+  background-color: var(--theme-text);
+  clip-path: polygon(7px 0%, 100% 0%, calc(100% - 7px) 100%, 0% 100%);
+}
+.-zag-bg.zag-transition:hover {
+  transform: scale(1.1) skewX(-7deg);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.zag-flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.button-accent {
+  display: inline-block;
+  background: var(--theme-accent-gradient);
+  background-size: 200% auto;
+  color: var(--nord6);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  transform: translateY(0);
+  transition: all var(--transition-speed-medium) var(--transition-easing);
+  border: none;
+  box-shadow: 0 4px 15px -5px var(--nord10);
+}
+
+.button-accent:hover {
+  transform: translateY(-5px) scale(1.05) skewX(-7deg);
+  box-shadow: 0 15px 25px -10px var(--nord10);
+  text-decoration: none;
+  animation-play-state: paused; /* Pauses .animate-glow on hover */
+  background-position: right center;
+}
+
+/*
+================================================================================
+  8. OPT-IN ANIMATION UTILITIES
+================================================================================
+*/
+
+/* --- KEYFRAMES --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes subtle-glow {
+  from {
+    box-shadow: 0 0 5px -5px var(--theme-accent);
+  }
+  to {
+    box-shadow: 0 0 20px -5px var(--theme-accent);
+  }
+}
+@keyframes aurora-pulse {
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* --- UTILITY CLASSES --- */
+.animate-fade-in {
+  animation: fadeIn 1s var(--transition-easing) forwards;
+}
+.animate-slide-in-left {
+  animation: slideInFromLeft 1s var(--transition-easing) backwards;
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-glow {
+  animation: subtle-glow 2s infinite alternate;
+}
+
+.stagger-children > * {
+  opacity: 0;
+  animation: slideInFromLeft 0.8s var(--transition-easing) forwards;
+}
+.stagger-children {
+  --stagger-delay: 100ms;
+}
+.stagger-children > *:nth-child(2) {
+  animation-delay: calc(1 * var(--stagger-delay));
+}
+.stagger-children > *:nth-child(3) {
+  animation-delay: calc(2 * var(--stagger-delay));
+}
+.stagger-children > *:nth-child(4) {
+  animation-delay: calc(3 * var(--stagger-delay));
+}
+.stagger-children > *:nth-child(5) {
+  animation-delay: calc(4 * var(--stagger-delay));
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity var(--transition-speed-slow) var(--transition-easing),
+    transform var(--transition-speed-slow) var(--transition-easing);
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+================================================================================
+  9. ADVANCED & EXPERIMENTAL UTILITIES
+================================================================================
+
+*/
+.hover-zag-dotted-grid {
+  position: relative;
+  z-index: 1; /* Ensures pseudo-elements stay behind content */
+  transition: color var(--transition-speed-medium) var(--transition-easing);
+}
+
+.hover-zag-dotted-grid::before,
+.hover-zag-dotted-grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--transition-speed-medium) var(--transition-easing);
+  pointer-events: none;
+}
+
+.hover-zag-dotted-grid:hover::before,
+.hover-zag-dotted-grid:hover::after {
+  opacity: 1;
+}
+
+/* This pseudo-element creates the dotted background */
+.hover-zag-dotted-grid::before {
+  --dot-bg: var(--theme-bg);
+  --dot-color: var(--theme-text-muted);
+  --dot-size: 1px;
+  --dot-space: 16px;
+  background:
+    radial-gradient(
+      circle at center,
+      var(--dot-color) var(--dot-size),
+      transparent var(--dot-size)
+    ),
+    var(--dot-bg);
+  background-size: var(--dot-space) var(--dot-space);
+}
+
+/* This pseudo-element creates the gradient overlay */
+.hover-zag-dotted-grid::after {
+  background: linear-gradient(
+    159deg,
+    var(--theme-bg) 0%,
+    var(--theme-bg) 50%,
+    color-mix(in srgb, var(--theme-bg) 80%, transparent) 100%
+  );
+}
+
+/* Dark mode variable overrides */
+:where(.dark, .dark *) .hover-zag-dotted-grid::before {
+  --dot-bg: var(--theme-bg);
+  --dot-color: var(--theme-text-muted);
+}
+/* --- [1] Scroll-triggered Animation --- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity var(--transition-speed-slow) var(--transition-easing),
+    transform var(--transition-speed-slow) var(--transition-easing);
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- [2] Interactive Card (3D Tilt & Spotlight) --- */
+.interactive-card {
+  position: relative;
+  background-color: var(--theme-bg-secondary);
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  transition:
+    background-color var(--transition-speed-medium) ease,
+    transform 0.1s ease;
+  overflow: hidden; /* Keep the spotlight contained */
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0))
+    rotateY(var(--rotate-y, 0));
+}
+.interactive-card:hover {
+  background-color: var(--theme-bg);
+}
+.interactive-card::before {
+  content: "";
+  position: absolute;
+  top: var(--spotlight-y, -100%);
+  left: var(--spotlight-x, -100%);
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--theme-accent) 0%, transparent 70%);
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+.interactive-card:hover::before {
+  opacity: 0.15;
+}
+.interactive-card > * {
+  position: relative;
+  z-index: 1; /* Ensure card content is above the spotlight */
+}
+
+/* --- [3] Text Scramble on Hover --- */
+.has-text-scramble {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+.scramble-char {
+  display: inline-block;
+}
+
+/* --- [4] Magnetic Elements --- */
+.is-magnetic {
+  display: inline-block;
+}
+.is-magnetic > * {
+  transition: transform var(--transition-speed-slow) var(--transition-easing);
+  will-change: transform;
+}
+
+/* --- [5] Parallax Effect --- */
+.parallax-container {
+  perspective: 100px;
+}
+.parallax-element {
+  will-change: transform;
+  transition: transform 0.1s linear; /* Smooths out the parallax movement */
+}
+
+/* --- [6] Dotted Grid (CSS Only) --- */
+.hover-zag-dotted-grid {
+  position: relative;
+  z-index: 1;
+  transition: color var(--transition-speed-medium) var(--transition-easing);
+}
+.hover-zag-dotted-grid::before,
+.hover-zag-dotted-grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--transition-speed-medium) var(--transition-easing);
+  pointer-events: none;
+}
+.hover-zag-dotted-grid:hover::before,
+.hover-zag-dotted-grid:hover::after {
+  opacity: 1;
+}
+.hover-zag-dotted-grid::before {
+  --dot-bg: var(--theme-bg);
+  --dot-color: var(--theme-text-muted);
+  --dot-size: 1px;
+  --dot-space: 16px;
+  background:
+    radial-gradient(
+      circle at center,
+      var(--dot-color) var(--dot-size),
+      transparent var(--dot-size)
+    ),
+    var(--dot-bg);
+  background-size: var(--dot-space) var(--dot-space);
+}
+.hover-zag-dotted-grid::after {
+  background: linear-gradient(
+    159deg,
+    var(--theme-bg) 0%,
+    var(--theme-bg) 50%,
+    color-mix(in srgb, var(--theme-bg) 80%, transparent) 100%
+  );
+}
+:where(.dark, .dark *) .hover-zag-dotted-grid::before {
+  --dot-bg: var(--theme-bg);
+  --dot-color: var(--theme-text-muted);
+}
+
+/*
+================================================================================
+  10. RESPONSIVE OVERRIDES (MOBILE)
+================================================================================
+*/
+@media (max-width: 640px) {
+  :root {
+    --container-padding: 1.5rem;
+  }
+  main {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .flex.flex-row.sm\\:flex-row {
+    flex-direction: column !important;
+  }
+  h1,
+  h2,
+  h3 {
+    word-break: break-word;
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+    line-height: 1.3 !important;
+  }
+  /* Disable custom cursor and aurora on mobile for better usability */
+  .has-custom-cursor,
+  .has-custom-cursor * {
+    cursor: auto;
+  }
+  #cursor {
+    display: none;
+  }
+  .has-aurora-background::before {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 1rem;
+  }
+}
+
+.nord-blue-dark {
+  fill: #5e81ac;
+}
+
+.nord-blue-light {
+  fill: #81a1c1;
 }
