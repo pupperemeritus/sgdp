@@ -1,0 +1,44 @@
+---
+title: WeatherVoyageR
+slug: wthrvygr
+description: An R and Shiny project for analyzing and visualizing historical weather data across India.
+longDescription: A comprehensive workflow to fetch, clean, analyze, and visualize decades of GSOD weather data for Indian stations using R and Shiny.
+cardImage: "https://i.imgur.com/Sf9B4s9.png"
+tags:
+  ["r", "shiny", "data analysis", "visualization", "weather", "data pipeline"]
+githubUrl: ""
+timestamp: 2023-11-15T14:00:00+05:30
+featured: true
+---
+
+# **Indian Weather Explorer: A Deep Dive into GSOD Data with R & Shiny**
+
+This project provides a complete workflow for transforming raw, complex weather data from the Global Summary of the Day (GSOD) dataset into actionable, interactive insights. With a specific focus on stations across India, the entire pipeline—from data acquisition and cleaning to exploratory analysis and the deployment of web applications—is implemented using R and Shiny, with an initial assist from Python.
+
+The core objective is to make decades of historical weather data accessible and easy to explore. We've developed a robust data pipeline to handle the complexities of the raw data and built a suite of interactive Shiny dashboards for visualization, clustering, extreme event analysis, and forecasting.
+
+---
+
+## **The Data Pipeline: From Raw Archives to Clean Data**
+
+A significant portion of this project is dedicated to a multi-step pipeline that ensures the data is clean, organized, and analysis-ready.
+
+1.  **Automated Download & Extraction**: A Python script kicks off the process by automatically downloading yearly `tar.gz` archives (1929–2023) from the NCEI/NOAA data source. It uses parallel processing to speed up the task and cleans up the archives afterward.
+2.  **Filtering for India**: R scripts take over to process the extracted files, first organizing the global data by station and then filtering for Indian stations. To ensure data quality, only stations with at least **four years** of records are kept.
+3.  **Cleaning & Transformation**: The combined Indian data undergoes rigorous cleaning.
+    - **Missing Values**: Placeholder values like `9999.9` are replaced with `NA`, and columns with over 20% missing data are dropped.
+    - **Unit Conversion**: All measurements are standardized to SI units. For instance, temperature is converted from Fahrenheit to Celsius using the formula: $T_C = (T_F - 32) \times \frac{5}{9}$.
+    - **Feature Engineering**: The cryptic 6-digit `FRSHTT` (Fog, Rain, Snow, etc.) bitmask is decoded into six clear, separate binary columns, making event-based analysis straightforward.
+
+The final, polished dataset is saved as `cleaned_data.csv`, ready for analysis.
+
+---
+
+## **Interactive Analysis with Shiny Apps**
+
+While static plots like time-series graphs and correlation heatmaps provide initial insights, the heart of this project lies in the interactive applications built with R Shiny. These tools empower users to dynamically explore the data without writing any code.
+
+- **Weather Station Explorer**: An interactive Leaflet map where users can select any weather station from a dropdown menu to view its location, average yearly temperature, and most common weather event.
+- **Seasonal Weather Clustering**: This app uses **k-means clustering** to group stations with similar weather patterns. Users can toggle between seasons (Winter, Summer, Monsoon, etc.) to see how these clusters shift throughout the year.
+- **Extreme Weather Event Analyzer**: A tool for identifying and visualizing outliers. Users can select a weather attribute (like Temperature or Precipitation), a station, and an extremity level (e.g., 3 standard deviations from the mean) to see a chart of when extreme events occurred.
+- **Forecasting Suite**: A set of dashboards for time-series forecasting. Users can select a station and generate temperature forecasts using various models, including **SARIMA**, **ARIMA**, and **Random Forest**, and review model performance metrics.
