@@ -55,7 +55,6 @@ This project was a fantastic learning experience, but it came with its share of 
 
 1. **Taming Architectural Complexity**: Designing LesionNet felt like assembling a complex puzzle. Getting so many different types of blocks—Inverted Residuals, Dense Blocks, Inception modules—to work together harmoniously took a lot of trial, error, and fine-tuning.
 2. **Balancing the Two Branches**: A key challenge was ensuring the model learned to trust both the image and the metadata. I had to carefully design the network so that one branch didn't overpower the other, allowing for a true fusion of information.
-3. **Implementing the Custom Metric**: Writing the `PartialAUROC` metric from scratch was tough. It required a deep dive into how ROC curves are calculated and then carefully modifying the logic to focus only on that high-sensitivity region. It was a difficult but rewarding part of the project.
 
 ---
 
