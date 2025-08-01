@@ -61,21 +61,21 @@
   --nord15: #b48ead;
 
   /* SEMANTIC VARIABLES (Light Theme) */
-  --theme-bg: var(--nord6);
-  --theme-bg-secondary: var(--nord5);
-  --theme-text: var(--nord1);
+  --theme-bg: var(--nord5);
+  --theme-bg-secondary: var(--nord4);
+  --theme-text: var(--nord0);
   --theme-text-muted: var(--nord2);
   --theme-heading: var(--nord0);
   --theme-accent: var(--nord10);
   --theme-accent-gradient: linear-gradient(
     90deg,
-    var(--nord7) 0%,
-    var(--nord8) 33%,
-    var(--nord15) 66%,
-    var(--nord10) 100%
+    var(--nord10) 0%,
+    var(--nord3) 33%,
+    var(--nord12) 66%,
+    var(--nord11) 100%
   );
-  --theme-border: var(--nord4);
-  --theme-code-bg: var(--nord5);
+  --theme-border: var(--nord3);
+  --theme-code-bg: var(--nord4);
 
   /* TYPOGRAPHY */
   --font-primary: "Fira Sans", sans-serif;
@@ -108,9 +108,10 @@
   --theme-accent: var(--nord8);
   --theme-accent-gradient: linear-gradient(
     90deg,
-    var(--nord7),
-    var(--nord15),
-    var(--nord7)
+    var(--nord7) 0%,
+    var(--nord4) 33%,
+    var(--nord12) 66%,
+    var(--nord7) 100%
   );
   --theme-border: var(--nord2);
   --theme-code-bg: var(--nord1);
