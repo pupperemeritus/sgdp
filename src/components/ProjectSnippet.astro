@@ -32,7 +32,7 @@ const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
   </div>
 
   <div class="flex-1">
-    <div class="flex flex-wrap items-center justify-between gap-2">
+    <div class="block flex-wrap items-center justify-between gap-2">
       <Anchor url={url}>
         <h3
           class="has-text-scramble text-xl font-bold text-[var(--theme-heading)] transition-colors group-hover:text-[var(--theme-accent)]"
@@ -40,7 +40,8 @@ const { title, description, url, githubUrl, liveUrl, tags } = Astro.props;
           {title}
         </h3>
       </Anchor>
-      <div class="flex shrink-0 gap-4">
+
+      <div class="block shrink-0 gap-4">
         {
           githubUrl && (
             <Anchor
